@@ -38,7 +38,7 @@ Recipe Page
 ![Read Recipe](https://i.imgur.com/XR92tML.png)
 
 Mockup
-![Home](https://imgur.com/CzgTlmz)
+![Home](https://i.imgur.com/CzgTlmz.png)
 
 
 ***
