@@ -19,13 +19,25 @@ const playScreen = document.querySelector('#play-screen')
 
 
 /*----------------------------- Event Listeners -----------------------------*/
-playBtn.addEventListener('click', init)
-startMenuBtn.addEventListener('click', init)
+playBtn.addEventListener('click', () => {
+  render();
+  showPlayScreen();
+})
+startMenuBtn.addEventListener('click', () => {
+  init();
+  showStartScreen();
+})
 resetBtn.addEventListener('click', init)
 theme.addEventListener('click', selectTheme)
 
 
+// element.addEventListener('event',() => {    
+//   invokeMe();
+//   alsoInvokeMe();    
+// });
+
 /*-------------------------------- Functions --------------------------------*/
+init()
 
 function init(){
   // console.log(playerName1.value)
@@ -38,12 +50,27 @@ function init(){
     [1, 1, 1, null, null, -1, -1, -1],  // array 2
     [1, 1, 1, null, null, -1, -1, -1]   // array 3
   ]
-  startScreen.style.visibility = 'visible'
-  playScreen.style.visibility = 'hidden'
+  console.log('test init')
+}
+
+function showStartScreen(){
+  // startScreen.setAttribute('hidden', false)
+  playScreen.setAttribute('hidden', true)
+  startScreen.removeAttribute('hidden')
+}
+
+function showPlayScreen(){
+  startScreen.setAttribute('hidden', true)
+  // playScreen.style.visibility = 'visible'
+  playScreen.removeAttribute('hidden')
 }
 
 function selectTheme(evt){
   console.log(evt.target.innerHTML)
   dropDownBtn.innerHTML = evt.target.innerHTML
+
+}
+
+function render(){
 
 }
