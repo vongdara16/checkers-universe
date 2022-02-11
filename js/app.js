@@ -16,16 +16,20 @@ const startMenuBtn = document.querySelector('#start-menu-btn')
 const resetBtn = document.querySelector('#reset-btn')
 const startScreen = document.querySelector('#start-screen')
 const playScreen = document.querySelector('#play-screen')
+const gameTitle = document.querySelector('#game-title')
 
 
 /*----------------------------- Event Listeners -----------------------------*/
 playBtn.addEventListener('click', () => {
+  init();
   render();
-  showPlayScreen();
+  // showPlayScreen();
+  screenSwap();
 })
 startMenuBtn.addEventListener('click', () => {
   init();
-  showStartScreen();
+  // showStartScreen();
+  screenSwap();
 })
 resetBtn.addEventListener('click', init)
 theme.addEventListener('click', selectTheme)
@@ -36,8 +40,22 @@ theme.addEventListener('click', selectTheme)
 //   alsoInvokeMe();    
 // });
 
+// animate__animated
+// animate__slideOutUp
+// animate__slideOutDown
+
+// animate__slideInUp
+// animate__slideInDown
+
+// setTimeout accepts a callback & how long to wait before calling the cb
+// setTimeout(function() {
+//   colors.forEach(function(color, idx) {
+//     console.log(`${idx + 1} - ${color}`)
+//   })
+// }, 1000)  // 1000 milliseconds (1 sec)
+
 /*-------------------------------- Functions --------------------------------*/
-init()
+// init()
 
 function init(){
   // console.log(playerName1.value)
@@ -52,18 +70,42 @@ function init(){
   ]
   console.log('test init')
 }
-
-function showStartScreen(){
-  // startScreen.setAttribute('hidden', false)
+firstScreenLoadUp()
+function firstScreenLoadUp(){
+  gameTitle.classList.add('animate__fadeInDown')
+  startScreen.classList.add('animate__fadeInDown')
+  playScreen.classList.add('animate__fadeOutDown')
   playScreen.setAttribute('hidden', true)
-  startScreen.removeAttribute('hidden')
+  console.log( 'start screen:', startScreen.className)
+  console.log(playScreen.attributes, 'play screen')
+  
 }
 
-function showPlayScreen(){
-  startScreen.setAttribute('hidden', true)
-  // playScreen.style.visibility = 'visible'
-  playScreen.removeAttribute('hidden')
+function screenSwap(){
+  startScreen.classList.toggle('animate__fadeInDown')
+  startScreen.classList.toggle('animate__fadeOutUp')
+  playScreen.classList.toggle('animate__fadeInUp')
+  playScreen.classList.toggle('animate__fadeOutDown')
+  setTimeout(function(){
+    playScreen.toggleAttribute('hidden')
+    startScreen.toggleAttribute('hidden')
+
+  }, 300)
+  console.log(playScreen.className, 'play screen')
+  console.log(playScreen.attributes, 'play screen')
+  console.log(startScreen.className, 'start screen')
+  
 }
+
+// function showPlayScreen(){
+//   startScreen.classList.toggle('animate__slideInUp')
+//   startScreen.classList.toggle('animate__slideInDown')
+//   playScreen.classList.toggle('animate__slideInUp')
+//   playScreen.classList.toggle('animate__slideOutDown')
+  
+//   console.log(playScreen.className)
+
+// }
 
 function selectTheme(evt){
   console.log(evt.target.innerHTML)
