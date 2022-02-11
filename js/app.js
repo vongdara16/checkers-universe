@@ -9,7 +9,8 @@ let turn, winner, boardArray
 /*------------------------ Cached Element References ------------------------*/
 const playerName1 = document.querySelector('#input-player1')
 const playerName2 = document.querySelector('#input-player2')
-const theme = document.querySelector('.dropdown-item')
+const theme = document.querySelector('.dropdown-menu')
+const dropDownBtn = document.querySelector('#dropdownMenuButton2')
 const playBtn = document.querySelector('#play-btn')
 const startMenuBtn = document.querySelector('#start-menu-btn')
 const resetBtn = document.querySelector('#reset-btn')
@@ -21,6 +22,7 @@ const playScreen = document.querySelector('#play-screen')
 playBtn.addEventListener('click', init)
 startMenuBtn.addEventListener('click', init)
 resetBtn.addEventListener('click', init)
+theme.addEventListener('click', selectTheme)
 
 
 /*-------------------------------- Functions --------------------------------*/
@@ -40,3 +42,8 @@ function init(){
   playScreen.style.visibility = 'hidden'
 }
 
+function selectTheme(evt){
+  console.log(evt.target.innerHTML)
+  dropDownBtn.innerHTML = evt.target.innerHTML
+
+}
