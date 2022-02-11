@@ -3,7 +3,7 @@
 
 
 /*---------------------------- Variables (state) ----------------------------*/
-let turn, winner, boardarray
+let turn, winner, boardArray
 
 
 /*------------------------ Cached Element References ------------------------*/
