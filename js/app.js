@@ -10,12 +10,17 @@ let turn, winner, boardArray
 const playerName1 = document.querySelector('#input-player1')
 const playerName2 = document.querySelector('#input-player2')
 const theme = document.querySelector('.dropdown-item')
+const playBtn = document.querySelector('#play-btn')
+const startMenuBtn = document.querySelector('#start-menu-btn')
+const resetBtn = document.querySelector('#reset-btn')
+const startScreen = document.querySelector('#start-screen')
+const playScreen = document.querySelector('#play-screen')
 
 
 /*----------------------------- Event Listeners -----------------------------*/
-document.querySelector('#play-btn').addEventListener('click', init)
-document.querySelector('#start-menu-btn').addEventListener('click', init)
-document.querySelector('#reset-btn').addEventListener('click', init)
+playBtn.addEventListener('click', init)
+startMenuBtn.addEventListener('click', init)
+resetBtn.addEventListener('click', init)
 
 
 /*-------------------------------- Functions --------------------------------*/
@@ -31,4 +36,7 @@ function init(){
     [1, 1, 1, null, null, -1, -1, -1],  // array 2
     [1, 1, 1, null, null, -1, -1, -1]   // array 3
   ]
+  startScreen.style.visibility = 'visible'
+  playScreen.style.visibility = 'hidden'
 }
+
