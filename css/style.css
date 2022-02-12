@@ -38,7 +38,9 @@ body {
 #game-title {
   animation-delay: 0.3s;
   animation-duration: 0.8s;
+  text-align: center;
 }
+
 
 section#board {
   /* visibility: hidden; */

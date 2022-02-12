@@ -34,18 +34,10 @@ startMenuBtn.addEventListener('click', () => {
 resetBtn.addEventListener('click', init)
 theme.addEventListener('click', selectTheme)
 
-
 // element.addEventListener('event',() => {    
 //   invokeMe();
 //   alsoInvokeMe();    
 // });
-
-// animate__animated
-// animate__slideOutUp
-// animate__slideOutDown
-
-// animate__slideInUp
-// animate__slideInDown
 
 // setTimeout accepts a callback & how long to wait before calling the cb
 // setTimeout(function() {
@@ -56,28 +48,12 @@ theme.addEventListener('click', selectTheme)
 
 /*-------------------------------- Functions --------------------------------*/
 // init()
-
-function init(){
-  // console.log(playerName1.value)
-  // console.log(playerName2.value)
-  turn = 1
-  winner = null
-  boardArray = [
-    [1, 1, 1, null, null, -1, -1, -1],  // array 0
-    [1, 1, 1, null, null, -1, -1, -1],  // array 1
-    [1, 1, 1, null, null, -1, -1, -1],  // array 2
-    [1, 1, 1, null, null, -1, -1, -1]   // array 3
-  ]
-  console.log('test init')
-}
 firstScreenLoadUp()
 function firstScreenLoadUp(){
   gameTitle.classList.add('animate__fadeInDown')
   startScreen.classList.add('animate__fadeInDown')
   playScreen.classList.add('animate__fadeOutDown')
   playScreen.setAttribute('hidden', true)
-  console.log( 'start screen:', startScreen.className)
-  console.log(playScreen.attributes, 'play screen')
   
 }
 
@@ -89,23 +65,21 @@ function screenSwap(){
   setTimeout(function(){
     playScreen.toggleAttribute('hidden')
     startScreen.toggleAttribute('hidden')
-
   }, 300)
-  console.log(playScreen.className, 'play screen')
-  console.log(playScreen.attributes, 'play screen')
-  console.log(startScreen.className, 'start screen')
   
 }
 
-// function showPlayScreen(){
-//   startScreen.classList.toggle('animate__slideInUp')
-//   startScreen.classList.toggle('animate__slideInDown')
-//   playScreen.classList.toggle('animate__slideInUp')
-//   playScreen.classList.toggle('animate__slideOutDown')
-  
-//   console.log(playScreen.className)
-
-// }
+function init(){
+  turn = 1
+  winner = null
+  boardArray = [
+    [1, 1, 1, null, null, -1, -1, -1],  // array 0
+    [1, 1, 1, null, null, -1, -1, -1],  // array 1
+    [1, 1, 1, null, null, -1, -1, -1],  // array 2
+    [1, 1, 1, null, null, -1, -1, -1]   // array 3
+  ]
+  console.log('test init')
+}
 
 function selectTheme(evt){
   console.log(evt.target.innerHTML)
