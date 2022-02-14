@@ -5,6 +5,9 @@
 /*---------------------------- Variables (state) ----------------------------*/
 let turn, winner, boardArray
 
+let pieceId, pieceFirstN, pieceLastN, targetId, targetFirstN, targetLastN
+
+
 
 /*------------------------ Cached Element References ------------------------*/
 const gameTitle = document.querySelector('#game-title')
@@ -102,6 +105,16 @@ function init(){
   ]
   console.log('test init')
   render();
+  resetPieceInfo();
+}
+
+function resetPieceInfo(){
+  pieceId = null
+  pieceFirstN = null
+  pieceLastN = null
+  targetId = null
+  targetFirstN = null
+  targetLastN = null
 }
 
 function selectTheme(evt){
@@ -143,28 +156,50 @@ function render(){
 
 }
 
-let pieceId, pieceFirstN, pieceLastN, targetId, targetFirstN, targetLastN
 function playerMove(evt){
-
-  if (evt.target.className === 'one-piece'){
-    pieceId = evt.target.id
-    pieceFirstN = Number(pieceId[0])
-    pieceLastN = Number(pieceId[1])
-    console.log(pieceId, 'pieceId', pieceFirstN, 'first', pieceLastN, 'last')
-  } else if(evt.target.className === 'square inplay'){
-    console.log('test inplay square')
-    targetId = evt.target.id
-    targetFirstN = Number(targetId[0])
-    targetLastN = Number(targetId[1])
-    console.log(targetId, 'targId', targetFirstN, 'targFirst', targetLastN, 'targLast')
+  if (turn === 1){
+    if (evt.target.className === 'one-piece'){
+      pieceId = evt.target.id
+      pieceFirstN = Number(pieceId[0])
+      pieceLastN = Number(pieceId[1])
+      console.log(pieceId, 'pieceId', pieceFirstN, 'first', pieceLastN, 'last')
+    } else if(evt.target.className === 'square inplay' && pieceId !== null){
+      console.log('test inplay square')
+      targetId = evt.target.id
+      targetFirstN = Number(targetId[0])
+      targetLastN = Number(targetId[1])
+      console.log(targetId, 'targId', targetFirstN, 'targFirst', targetLastN, 'targLast')
+    }
+    if (targetLastN === pieceLastN+1){
+      boardArray[targetFirstN][targetLastN] = 1;
+      boardArray[pieceFirstN][pieceLastN] = null;
+      render();
+      resetPieceInfo();
+      turn *= -1
+      // console.log('test if state')
+    }
+  } else {
+    if (evt.target.className === 'two-piece'){
+      pieceId = evt.target.id
+      pieceFirstN = Number(pieceId[0])
+      pieceLastN = Number(pieceId[1])
+      console.log(pieceId, 'pieceId', pieceFirstN, 'first', pieceLastN, 'last')
+    } else if(evt.target.className === 'square inplay' && pieceId !== null){
+      console.log('test inplay square')
+      targetId = evt.target.id
+      targetFirstN = Number(targetId[0])
+      targetLastN = Number(targetId[1])
+      console.log(targetId, 'targId', targetFirstN, 'targFirst', targetLastN, 'targLast')
+    }
+    if (targetLastN === pieceLastN-1){
+      boardArray[targetFirstN][targetLastN] = -1;
+      boardArray[pieceFirstN][pieceLastN] = null;
+      render();
+      resetPieceInfo();
+      turn *= -1
+      // console.log('test if state')
+    }
   }
-  if (targetLastN > pieceLastN){
-    boardArray[targetFirstN][targetLastN] = 1;
-    boardArray[pieceFirstN][pieceLastN] = null;
-    render();
-    console.log('test if state')
-  }
-
 }
 
 function movePiece (){
