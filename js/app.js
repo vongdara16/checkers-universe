@@ -7,16 +7,20 @@ let turn, winner, boardArray
 
 
 /*------------------------ Cached Element References ------------------------*/
+const gameTitle = document.querySelector('#game-title')
+
 const playerName1 = document.querySelector('#input-player1')
 const playerName2 = document.querySelector('#input-player2')
 const theme = document.querySelector('.dropdown-menu')
 const dropDownBtn = document.querySelector('#dropdownMenuButton2')
 const playBtn = document.querySelector('#play-btn')
+const startScreen = document.querySelector('#start-screen')
+
 const startMenuBtn = document.querySelector('#start-menu-btn')
 const resetBtn = document.querySelector('#reset-btn')
-const startScreen = document.querySelector('#start-screen')
+const gameBoard = document.querySelector('#game-board')
+const squares = document.querySelectorAll('.square')
 const playScreen = document.querySelector('#play-screen')
-const gameTitle = document.querySelector('#game-title')
 
 
 /*----------------------------- Event Listeners -----------------------------*/
@@ -88,5 +92,22 @@ function selectTheme(evt){
 }
 
 function render(){
+  // console.log(squares)
+  // boardArray.forEach((elem, idx) => {
+  //   elem.forEach((el, i) => {
+  //     if (el !== null){
+  //       squares.forEach((sqEl, index) => {
+  //         console.log(sqEl.id)
+  //       })
+  //     }
+  //   })
+  // })
 
+  // console.log(boardArray[0][7])
+  let num = '0-1'
+  let firstN = Number(num[0])
+  console.log(firstN)
+  let lastN = Number(num[2])
+  console.log(lastN)
+  
 }
