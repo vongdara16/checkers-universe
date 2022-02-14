@@ -21,6 +21,7 @@ const resetBtn = document.querySelector('#reset-btn')
 const gameBoard = document.querySelector('#game-board')
 const sqInplay = document.querySelectorAll('.inplay')
 const playScreen = document.querySelector('#play-screen')
+// const names = document.querySelectorAll('.name')
 
 
 /*----------------------------- Event Listeners -----------------------------*/
@@ -92,33 +93,32 @@ function selectTheme(evt){
 }
 
 function render(){
-  // console.log(squares)
-  // boardArray.forEach((elem, idx) => {
-  //   elem.forEach((el, i) => {
-  //     if (el !== null){
-  //       squares.forEach((sqEl, index) => {
-  //         console.log(sqEl.id)
-  //       })
-  //     }
-  //   })
-  // })
 
-  // console.log(boardArray[0][7])
-  sqInplay.forEach((elem, idx) => {
-    
-    // console.log(elem.id)
-    let num = elem.id
-    console.log(num)
+  let name1 = playerName1.value
+  let name2 = playerName2.value
+  if (name1 === ''){
+    document.querySelector('#display-name-1').innerHTML = 'Player 1'
+  } else{
+    document.querySelector('#display-name-1').innerHTML = name1
+  }
+  if (name2 === ''){
+    document.querySelector('#display-name-2').innerHTML = 'Player 2'
+  } else{
+    document.querySelector('#display-name-2').innerHTML = name2
+  }
+  // document.querySelector('#player-2-name').innerHTML = name2
+
+  sqInplay.forEach((elem) => {
+        let num = elem.id
     let firstN = Number(num[0])
     let lastN = Number(num[1])
     if (boardArray[firstN][lastN] === 1){
-      console.log('test if boardArray')
-      elem.innerHTML = `<div id="one-piece"></div>`
+      elem.innerHTML = `<div id="one-piece">${firstN}${lastN}</div>`
     }
     if (boardArray[firstN][lastN] === -1){
-      console.log('test if boardArray')
-      elem.innerHTML = `<div id="two-piece"></div>`
+      elem.innerHTML = `<div id="two-piece">${firstN}${lastN}</div>`
     }
   })
   
 }
+
