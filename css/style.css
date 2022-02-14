@@ -75,7 +75,7 @@ div#white {
   background-color: white;
 }
 
-div#one-piece {
+div.one-piece {
   border-radius: 50%;
   border: 2px solid blue;
   background-color: orange;
@@ -84,15 +84,17 @@ div#one-piece {
   width: 80%;
   justify-self: center;
   align-self: center;
+  text-align: center;
 }
 
-div#two-piece {
+div.two-piece {
   border-radius: 50%;
-  border: 2px solid cyan;
-  background-color: green;
+  border: 2px solid magenta;
+  background-color: lightgreen;
   box-shadow: 10px;
   height: 80%;
   width: 80%;
   justify-self: center;
   align-self: center;
+  text-align: center;
 }

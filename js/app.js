@@ -39,6 +39,12 @@ startMenuBtn.addEventListener('click', () => {
 resetBtn.addEventListener('click', init)
 theme.addEventListener('click', selectTheme)
 
+// gameBoard.addEventListener('click', playerMove)
+
+sqInplay.forEach((elem) => {
+  elem.addEventListener('click', playerMove)
+})
+
 // element.addEventListener('event',() => {    
 //   invokeMe();
 //   alsoInvokeMe();    
@@ -109,16 +115,20 @@ function render(){
   // document.querySelector('#player-2-name').innerHTML = name2
 
   sqInplay.forEach((elem) => {
-        let num = elem.id
+    let num = elem.id
     let firstN = Number(num[0])
     let lastN = Number(num[1])
     if (boardArray[firstN][lastN] === 1){
-      elem.innerHTML = `<div id="one-piece">${firstN}${lastN}</div>`
+      elem.innerHTML = `<div class="one-piece" id="${firstN}${lastN}">${firstN}${lastN}</div>`
     }
     if (boardArray[firstN][lastN] === -1){
-      elem.innerHTML = `<div id="two-piece">${firstN}${lastN}</div>`
+      elem.innerHTML = `<div class="two-piece" id="${firstN}${lastN}">${firstN}${lastN}</div>`
     }
   })
   
 }
 
+function playerMove(evt){
+  console.log(evt.target)
+
+}
