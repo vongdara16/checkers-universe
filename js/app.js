@@ -165,12 +165,15 @@ function render(){
 }
 
 function playerMove(evt){
+  // evt.target.parentElement.classList.toggle('highlight')
+
   if (turn === 1){
     if (evt.target.className === 'one-piece'){
       pieceId = evt.target.id
       pieceFirstN = Number(pieceId[0])
       pieceLastN = Number(pieceId[1])
       console.log(pieceId, 'pieceId', pieceFirstN, 'first', pieceLastN, 'last')
+      resetHighlight(evt)
       evt.target.parentElement.classList.toggle('highlight')
     } else if(evt.target.className === 'square inplay' && pieceId !== null){
       console.log('test inplay square')
@@ -178,9 +181,10 @@ function playerMove(evt){
       targetFirstN = Number(targetId[0])
       targetLastN = Number(targetId[1])
       console.log(targetId, 'targId', targetFirstN, 'targFirst', targetLastN, 'targLast')
+      resetHighlight(evt)
     }
     if (pieceLastN % 2 === 0){
-      if (targetLastN === pieceLastN+1 && (targetFirstN === pieceFirstN || targetFirstN === pieceFirstN-1)){
+      if (targetLastN === pieceLastN+1 && (targetFirstN === pieceFirstN || targetFirstN === pieceFirstN-1) && (boardArray[targetFirstN][targetLastN] === null)){
         boardArray[targetFirstN][targetLastN] = 1;
         boardArray[pieceFirstN][pieceLastN] = null;
         turn *= -1
@@ -189,7 +193,7 @@ function playerMove(evt){
         // console.log('test if state')
       }
     }else {
-      if (targetLastN === pieceLastN+1 && (targetFirstN === pieceFirstN || targetFirstN === pieceFirstN+1)){
+      if (targetLastN === pieceLastN+1 && (targetFirstN === pieceFirstN || targetFirstN === pieceFirstN+1)  && (boardArray[targetFirstN][targetLastN] === null)){
         boardArray[targetFirstN][targetLastN] = 1;
         boardArray[pieceFirstN][pieceLastN] = null;
         turn *= -1
@@ -204,15 +208,18 @@ function playerMove(evt){
       pieceFirstN = Number(pieceId[0])
       pieceLastN = Number(pieceId[1])
       console.log(pieceId, 'pieceId', pieceFirstN, 'first', pieceLastN, 'last')
+      resetHighlight(evt)
+      evt.target.parentElement.classList.toggle('highlight')
     } else if(evt.target.className === 'square inplay' && pieceId !== null){
       console.log('test inplay square')
       targetId = evt.target.id
       targetFirstN = Number(targetId[0])
       targetLastN = Number(targetId[1])
       console.log(targetId, 'targId', targetFirstN, 'targFirst', targetLastN, 'targLast')
+      resetHighlight(evt)
     }
     if (pieceLastN % 2 === 0){
-      if (targetLastN === pieceLastN-1 && (targetFirstN === pieceFirstN || targetFirstN === pieceFirstN-1)){
+      if (targetLastN === pieceLastN-1 && (targetFirstN === pieceFirstN || targetFirstN === pieceFirstN-1)  && (boardArray[targetFirstN][targetLastN] === null)){
         boardArray[targetFirstN][targetLastN] = -1;
         boardArray[pieceFirstN][pieceLastN] = null;
         turn *= -1
@@ -221,7 +228,7 @@ function playerMove(evt){
         // console.log('test if state')
       }
     }else {
-      if (targetLastN === pieceLastN-1 && (targetFirstN === pieceFirstN || targetFirstN === pieceFirstN+1)){
+      if (targetLastN === pieceLastN-1 && (targetFirstN === pieceFirstN || targetFirstN === pieceFirstN+1)  && (boardArray[targetFirstN][targetLastN] === null)){
         boardArray[targetFirstN][targetLastN] = -1;
         boardArray[pieceFirstN][pieceLastN] = null;
         turn *= -1
@@ -238,6 +245,12 @@ function playerMove(evt){
     //   turn *= -1
     // }
   }
+}
+
+function resetHighlight(evt){
+  sqInplay.forEach((elem, idx) =>{
+    elem.classList.remove('highlight')
+  })
 }
 
 function jumpPiece(){
