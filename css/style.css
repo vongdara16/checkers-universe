@@ -66,8 +66,33 @@ div.square {
   align-items: center;
   justify-content: center;
   font-family: 'Rowdies', cursive; */
+  display: grid;
+  /* justify-content: center;
+  align-items: center; */
 }
 
-div.white {
+div#white {
   background-color: white;
+}
+
+div#one-piece {
+  border-radius: 50%;
+  border: 2px solid blue;
+  background-color: orange;
+  box-shadow: 10px;
+  height: 80%;
+  width: 80%;
+  justify-self: center;
+  align-self: center;
+}
+
+div#two-piece {
+  border-radius: 50%;
+  border: 2px solid cyan;
+  background-color: green;
+  box-shadow: 10px;
+  height: 80%;
+  width: 80%;
+  justify-self: center;
+  align-self: center;
 }

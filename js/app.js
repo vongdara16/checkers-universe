@@ -19,7 +19,7 @@ const startScreen = document.querySelector('#start-screen')
 const startMenuBtn = document.querySelector('#start-menu-btn')
 const resetBtn = document.querySelector('#reset-btn')
 const gameBoard = document.querySelector('#game-board')
-const squares = document.querySelectorAll('.square')
+const sqInplay = document.querySelectorAll('.inplay')
 const playScreen = document.querySelector('#play-screen')
 
 
@@ -104,10 +104,21 @@ function render(){
   // })
 
   // console.log(boardArray[0][7])
-  let num = '0-1'
-  let firstN = Number(num[0])
-  console.log(firstN)
-  let lastN = Number(num[2])
-  console.log(lastN)
+  sqInplay.forEach((elem, idx) => {
+    
+    // console.log(elem.id)
+    let num = elem.id
+    console.log(num)
+    let firstN = Number(num[0])
+    let lastN = Number(num[1])
+    if (boardArray[firstN][lastN] === 1){
+      console.log('test if boardArray')
+      elem.innerHTML = `<div id="one-piece"></div>`
+    }
+    if (boardArray[firstN][lastN] === -1){
+      console.log('test if boardArray')
+      elem.innerHTML = `<div id="two-piece"></div>`
+    }
+  })
   
 }
