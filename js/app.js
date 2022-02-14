@@ -108,6 +108,7 @@ function init(){
   console.log('test init')
   render();
   resetPieceInfo();
+  resetHighlight();
 }
 
 function resetPieceInfo(){
@@ -175,33 +176,17 @@ function playerMove(evt){
       console.log(pieceId, 'pieceId', pieceFirstN, 'first', pieceLastN, 'last')
       resetHighlight(evt)
       evt.target.parentElement.classList.toggle('highlight')
-    } else if(evt.target.className === 'square inplay' && pieceId !== null){
+    }
+    if (evt.target.className === 'square inplay' && pieceId !== null){
       console.log('test inplay square')
       targetId = evt.target.id
       targetFirstN = Number(targetId[0])
       targetLastN = Number(targetId[1])
       console.log(targetId, 'targId', targetFirstN, 'targFirst', targetLastN, 'targLast')
       resetHighlight(evt)
+      moveP1Piece();
     }
-    if (pieceLastN % 2 === 0){
-      if (targetLastN === pieceLastN+1 && (targetFirstN === pieceFirstN || targetFirstN === pieceFirstN-1) && (boardArray[targetFirstN][targetLastN] === null)){
-        boardArray[targetFirstN][targetLastN] = 1;
-        boardArray[pieceFirstN][pieceLastN] = null;
-        turn *= -1
-        render();
-        resetPieceInfo();
-        // console.log('test if state')
-      }
-    }else {
-      if (targetLastN === pieceLastN+1 && (targetFirstN === pieceFirstN || targetFirstN === pieceFirstN+1)  && (boardArray[targetFirstN][targetLastN] === null)){
-        boardArray[targetFirstN][targetLastN] = 1;
-        boardArray[pieceFirstN][pieceLastN] = null;
-        turn *= -1
-        render();
-        resetPieceInfo();
-        // console.log('test if state')
-      }
-    }
+    // resetPieceInfo();
   } else {
     if (evt.target.className === 'two-piece'){
       pieceId = evt.target.id
@@ -210,40 +195,60 @@ function playerMove(evt){
       console.log(pieceId, 'pieceId', pieceFirstN, 'first', pieceLastN, 'last')
       resetHighlight(evt)
       evt.target.parentElement.classList.toggle('highlight')
-    } else if(evt.target.className === 'square inplay' && pieceId !== null){
+    }
+    if (evt.target.className === 'square inplay' && pieceId !== null){
       console.log('test inplay square')
       targetId = evt.target.id
       targetFirstN = Number(targetId[0])
       targetLastN = Number(targetId[1])
       console.log(targetId, 'targId', targetFirstN, 'targFirst', targetLastN, 'targLast')
       resetHighlight(evt)
+      moveP2Piece();
     }
-    if (pieceLastN % 2 === 0){
-      if (targetLastN === pieceLastN-1 && (targetFirstN === pieceFirstN || targetFirstN === pieceFirstN-1)  && (boardArray[targetFirstN][targetLastN] === null)){
-        boardArray[targetFirstN][targetLastN] = -1;
-        boardArray[pieceFirstN][pieceLastN] = null;
-        turn *= -1
-        render();
-        resetPieceInfo();
-        // console.log('test if state')
-      }
-    }else {
-      if (targetLastN === pieceLastN-1 && (targetFirstN === pieceFirstN || targetFirstN === pieceFirstN+1)  && (boardArray[targetFirstN][targetLastN] === null)){
-        boardArray[targetFirstN][targetLastN] = -1;
-        boardArray[pieceFirstN][pieceLastN] = null;
-        turn *= -1
-        render();
-        resetPieceInfo();
-        // console.log('test if state')
-      }
+  }
+}
+
+function moveP1Piece(){
+  if (pieceLastN % 2 === 0){
+    if (targetLastN === pieceLastN+1 && (targetFirstN === pieceFirstN || targetFirstN === pieceFirstN-1) && (boardArray[targetFirstN][targetLastN] === null)){
+      boardArray[targetFirstN][targetLastN] = 1;
+      boardArray[pieceFirstN][pieceLastN] = null;
+      turn *= -1
+      render();
+      resetPieceInfo();
+    } else{
+      resetPieceInfo();
     }
-    // if (targetLastN === pieceLastN-1){
-    //   boardArray[targetFirstN][targetLastN] = -1;
-    //   boardArray[pieceFirstN][pieceLastN] = null;
-    //   render();
-    //   resetPieceInfo();
-    //   turn *= -1
-    // }
+  }else {
+    if (targetLastN === pieceLastN+1 && (targetFirstN === pieceFirstN || targetFirstN === pieceFirstN+1)  && (boardArray[targetFirstN][targetLastN] === null)){
+      boardArray[targetFirstN][targetLastN] = 1;
+      boardArray[pieceFirstN][pieceLastN] = null;
+      turn *= -1
+      render();
+      resetPieceInfo();
+    } else{
+      resetPieceInfo();
+    }
+  }
+}
+
+function moveP2Piece(){
+  if (pieceLastN % 2 === 0){
+    if (targetLastN === pieceLastN-1 && (targetFirstN === pieceFirstN || targetFirstN === pieceFirstN-1)  && (boardArray[targetFirstN][targetLastN] === null)){
+      boardArray[targetFirstN][targetLastN] = -1;
+      boardArray[pieceFirstN][pieceLastN] = null;
+      turn *= -1
+      render();
+      resetPieceInfo();
+    }
+  }else {
+    if (targetLastN === pieceLastN-1 && (targetFirstN === pieceFirstN || targetFirstN === pieceFirstN+1)  && (boardArray[targetFirstN][targetLastN] === null)){ 
+      boardArray[targetFirstN][targetLastN] = -1;
+      boardArray[pieceFirstN][pieceLastN] = null;
+      turn *= -1
+      render();
+      resetPieceInfo();
+    }
   }
 }
 
