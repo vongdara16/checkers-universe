@@ -170,13 +170,24 @@ function playerMove(evt){
       targetLastN = Number(targetId[1])
       console.log(targetId, 'targId', targetFirstN, 'targFirst', targetLastN, 'targLast')
     }
-    if (targetLastN === pieceLastN+1){
-      boardArray[targetFirstN][targetLastN] = 1;
-      boardArray[pieceFirstN][pieceLastN] = null;
-      render();
-      resetPieceInfo();
-      turn *= -1
-      // console.log('test if state')
+    if (pieceLastN % 2 === 0){
+      if (targetLastN === pieceLastN+1 && (targetFirstN === pieceFirstN || targetFirstN === pieceFirstN-1)){
+        boardArray[targetFirstN][targetLastN] = 1;
+        boardArray[pieceFirstN][pieceLastN] = null;
+        render();
+        resetPieceInfo();
+        turn *= -1
+        // console.log('test if state')
+      }
+    }else {
+      if (targetLastN === pieceLastN+1 && (targetFirstN === pieceFirstN || targetFirstN === pieceFirstN+1)){
+        boardArray[targetFirstN][targetLastN] = 1;
+        boardArray[pieceFirstN][pieceLastN] = null;
+        render();
+        resetPieceInfo();
+        turn *= -1
+        // console.log('test if state')
+      }
     }
   } else {
     if (evt.target.className === 'two-piece'){
@@ -191,17 +202,35 @@ function playerMove(evt){
       targetLastN = Number(targetId[1])
       console.log(targetId, 'targId', targetFirstN, 'targFirst', targetLastN, 'targLast')
     }
-    if (targetLastN === pieceLastN-1){
-      boardArray[targetFirstN][targetLastN] = -1;
-      boardArray[pieceFirstN][pieceLastN] = null;
-      render();
-      resetPieceInfo();
-      turn *= -1
-      // console.log('test if state')
+    if (pieceLastN % 2 === 0){
+      if (targetLastN === pieceLastN-1 && (targetFirstN === pieceFirstN || targetFirstN === pieceFirstN-1)){
+        boardArray[targetFirstN][targetLastN] = -1;
+        boardArray[pieceFirstN][pieceLastN] = null;
+        render();
+        resetPieceInfo();
+        turn *= -1
+        // console.log('test if state')
+      }
+    }else {
+      if (targetLastN === pieceLastN-1 && (targetFirstN === pieceFirstN || targetFirstN === pieceFirstN+1)){
+        boardArray[targetFirstN][targetLastN] = -1;
+        boardArray[pieceFirstN][pieceLastN] = null;
+        render();
+        resetPieceInfo();
+        turn *= -1
+        // console.log('test if state')
+      }
     }
+    // if (targetLastN === pieceLastN-1){
+    //   boardArray[targetFirstN][targetLastN] = -1;
+    //   boardArray[pieceFirstN][pieceLastN] = null;
+    //   render();
+    //   resetPieceInfo();
+    //   turn *= -1
+    // }
   }
 }
 
-function movePiece (){
+function jumpPiece(){
 
 }
