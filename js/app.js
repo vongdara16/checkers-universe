@@ -24,6 +24,8 @@ const resetBtn = document.querySelector('#reset-btn')
 const gameBoard = document.querySelector('#game-board')
 const sqInplay = document.querySelectorAll('.inplay')
 const playScreen = document.querySelector('#play-screen')
+const displayName1 = document.querySelector('#display-name-1')
+const displayName2 = document.querySelector('#display-name-2')
 // const names = document.querySelectorAll('.name')
 
 // const onePiece = document.querySelectorAll('.one-piece')
@@ -128,14 +130,14 @@ function render(){
   let name1 = playerName1.value
   let name2 = playerName2.value
   if (name1 === ''){
-    document.querySelector('#display-name-1').innerHTML = 'Player 1'
+    displayName1.innerHTML = 'Player 1'
   } else{
-    document.querySelector('#display-name-1').innerHTML = name1
+    displayName1.innerHTML = name1
   }
   if (name2 === ''){
-    document.querySelector('#display-name-2').innerHTML = 'Player 2'
+    displayName2.innerHTML = 'Player 2'
   } else{
-    document.querySelector('#display-name-2').innerHTML = name2
+    displayName2.innerHTML = name2
   }
   // document.querySelector('#player-2-name').innerHTML = name2
 
@@ -153,7 +155,13 @@ function render(){
       elem.innerHTML = ``
     }
   })
-
+  if (turn === 1){  
+    displayName1.style.color = 'red'
+    displayName2.style.color = ''
+  } else {
+    displayName1.style.color = ''
+    displayName2.style.color = 'red'
+  }
 }
 
 function playerMove(evt){
@@ -174,18 +182,18 @@ function playerMove(evt){
       if (targetLastN === pieceLastN+1 && (targetFirstN === pieceFirstN || targetFirstN === pieceFirstN-1)){
         boardArray[targetFirstN][targetLastN] = 1;
         boardArray[pieceFirstN][pieceLastN] = null;
+        turn *= -1
         render();
         resetPieceInfo();
-        turn *= -1
         // console.log('test if state')
       }
     }else {
       if (targetLastN === pieceLastN+1 && (targetFirstN === pieceFirstN || targetFirstN === pieceFirstN+1)){
         boardArray[targetFirstN][targetLastN] = 1;
         boardArray[pieceFirstN][pieceLastN] = null;
+        turn *= -1
         render();
         resetPieceInfo();
-        turn *= -1
         // console.log('test if state')
       }
     }
@@ -206,18 +214,18 @@ function playerMove(evt){
       if (targetLastN === pieceLastN-1 && (targetFirstN === pieceFirstN || targetFirstN === pieceFirstN-1)){
         boardArray[targetFirstN][targetLastN] = -1;
         boardArray[pieceFirstN][pieceLastN] = null;
+        turn *= -1
         render();
         resetPieceInfo();
-        turn *= -1
         // console.log('test if state')
       }
     }else {
       if (targetLastN === pieceLastN-1 && (targetFirstN === pieceFirstN || targetFirstN === pieceFirstN+1)){
         boardArray[targetFirstN][targetLastN] = -1;
         boardArray[pieceFirstN][pieceLastN] = null;
+        turn *= -1
         render();
         resetPieceInfo();
-        turn *= -1
         // console.log('test if state')
       }
     }
@@ -232,5 +240,5 @@ function playerMove(evt){
 }
 
 function jumpPiece(){
-
+  
 }
