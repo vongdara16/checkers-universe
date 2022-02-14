@@ -171,6 +171,7 @@ function playerMove(evt){
       pieceFirstN = Number(pieceId[0])
       pieceLastN = Number(pieceId[1])
       console.log(pieceId, 'pieceId', pieceFirstN, 'first', pieceLastN, 'last')
+      evt.target.parentElement.classList.toggle('highlight')
     } else if(evt.target.className === 'square inplay' && pieceId !== null){
       console.log('test inplay square')
       targetId = evt.target.id

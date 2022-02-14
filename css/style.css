@@ -98,3 +98,7 @@ div.two-piece {
   align-self: center;
   text-align: center;
 }
+
+div.highlight {
+  border: 2px solid red;
+}
