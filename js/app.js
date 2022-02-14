@@ -23,11 +23,14 @@ const sqInplay = document.querySelectorAll('.inplay')
 const playScreen = document.querySelector('#play-screen')
 // const names = document.querySelectorAll('.name')
 
+// const onePiece = document.querySelectorAll('.one-piece')
+// const twoPiece = document.querySelectorAll('.two-piece')
+
 
 /*----------------------------- Event Listeners -----------------------------*/
 playBtn.addEventListener('click', () => {
   init();
-  render();
+  // render();
   // showPlayScreen();
   screenSwap();
 })
@@ -40,6 +43,14 @@ resetBtn.addEventListener('click', init)
 theme.addEventListener('click', selectTheme)
 
 // gameBoard.addEventListener('click', playerMove)
+
+// onePiece.forEach((elem) =>{
+//   elem.addEventListener('click', selectPiece)
+// })
+
+// twoPiece.forEach((elem) =>{
+//   elem.addEventListener('click', selectPiece)
+// })
 
 sqInplay.forEach((elem) => {
   elem.addEventListener('click', playerMove)
@@ -90,6 +101,7 @@ function init(){
     [1, 1, 1, null, null, -1, -1, -1]   // array 3
   ]
   console.log('test init')
+  render();
 }
 
 function selectTheme(evt){
@@ -124,11 +136,37 @@ function render(){
     if (boardArray[firstN][lastN] === -1){
       elem.innerHTML = `<div class="two-piece" id="${firstN}${lastN}">${firstN}${lastN}</div>`
     }
+    if (boardArray[firstN][lastN] === null){
+      elem.innerHTML = ``
+    }
   })
-  
+
 }
 
+let pieceId, pieceFirstN, pieceLastN, targetId, targetFirstN, targetLastN
 function playerMove(evt){
-  console.log(evt.target)
+
+  if (evt.target.className === 'one-piece'){
+    pieceId = evt.target.id
+    pieceFirstN = Number(pieceId[0])
+    pieceLastN = Number(pieceId[1])
+    console.log(pieceId, 'pieceId', pieceFirstN, 'first', pieceLastN, 'last')
+  } else if(evt.target.className === 'square inplay'){
+    console.log('test inplay square')
+    targetId = evt.target.id
+    targetFirstN = Number(targetId[0])
+    targetLastN = Number(targetId[1])
+    console.log(targetId, 'targId', targetFirstN, 'targFirst', targetLastN, 'targLast')
+  }
+  if (targetLastN > pieceLastN){
+    boardArray[targetFirstN][targetLastN] = 1;
+    boardArray[pieceFirstN][pieceLastN] = null;
+    render();
+    console.log('test if state')
+  }
+
+}
+
+function movePiece (){
 
 }
