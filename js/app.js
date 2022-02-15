@@ -140,22 +140,22 @@ function playerMove(evt){
       resetHighlight();
       evt.target.parentElement.classList.toggle('highlight')
     }
-
+    
     if (evt.target.className === 'square inplay' && pieceId !== null){
       getTargetId(evt);
-      resetHighlight();
+      resetHighlight(evt);
       movePiece();
     }
   } else {
     if (evt.target.className === 'two-piece'){
       getPieceId(evt);
-      resetHighlight();
+      resetHighlight(evt);
       evt.target.parentElement.classList.toggle('highlight')
     }
-
+    
     if (evt.target.className === 'square inplay' && pieceId !== null){
       getTargetId(evt);
-      resetHighlight();
+      resetHighlight(evt);
       movePiece();
     }
   }
@@ -184,12 +184,14 @@ function movePiece(){
     if (moveCond(-1)){
       updateBoard();
     } else{
+      jumpP1Piece();
       resetPieceInfo();
     }
   }else {
     if (moveCond(1)){
       updateBoard();
     } else{
+      jumpP1Piece();
       resetPieceInfo();
     }
   }
@@ -212,15 +214,7 @@ function updateBoard(){
 }
 
 function jumpP1Piece(){
-  if (targetLastN === pieceLastN+2 && (boardArray[targetFirstN][targetLastN] === null)){
-    if (boardArray[pieceFirstN][pieceLastN+1] === -1){
-      console.log('test jumping from smaller array to bigger array')
-    }else if (boardArray[pieceFirstN-1][pieceLastN+1] === -1){
-      console.log('test jumping from bigger array to smaller arr')
-    }
+  if ((boardArray[targetFirstN][targetLastN] === null) && (targetLastN === pieceLastN+(turn*2)) && (targetFirstN === pieceFirstN+1 || targetFirstN === pieceFirstN-1)){
+    console.log('test if board elem is null for jumping')
   }
-}
-
-function jumpP2Piece(){
-  
 }
