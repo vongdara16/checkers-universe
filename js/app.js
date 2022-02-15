@@ -257,7 +257,7 @@ function jumpPieceOdd(){
 }
 
 function winState (){
-  let p1 = 0
+  let p1 = 0 
   let p2 = 0
   boardArray.forEach((array, idx) => {
     array.some((elem, i) => {
