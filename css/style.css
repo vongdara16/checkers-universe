@@ -80,8 +80,8 @@ div.one-piece {
   border: 2px solid blue;
   background-color: orange;
   box-shadow: 10px;
-  height: 80%;
-  width: 80%;
+  height: 90%;
+  width: 90%;
   justify-self: center;
   align-self: center;
   text-align: center;
@@ -92,8 +92,8 @@ div.two-piece {
   border: 2px solid magenta;
   background-color: lightgreen;
   box-shadow: 10px;
-  height: 80%;
-  width: 80%;
+  height: 90%;
+  width: 90%;
   justify-self: center;
   align-self: center;
   text-align: center;

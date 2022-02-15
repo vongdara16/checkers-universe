@@ -26,52 +26,24 @@ const sqInplay = document.querySelectorAll('.inplay')
 const playScreen = document.querySelector('#play-screen')
 const displayName1 = document.querySelector('#display-name-1')
 const displayName2 = document.querySelector('#display-name-2')
-// const names = document.querySelectorAll('.name')
-
-// const onePiece = document.querySelectorAll('.one-piece')
-// const twoPiece = document.querySelectorAll('.two-piece')
 
 
 /*----------------------------- Event Listeners -----------------------------*/
 playBtn.addEventListener('click', () => {
   init();
-  // render();
-  // showPlayScreen();
   screenSwap();
 })
 startMenuBtn.addEventListener('click', () => {
   init();
-  // showStartScreen();
   screenSwap();
 })
+
 resetBtn.addEventListener('click', init)
 theme.addEventListener('click', selectTheme)
-
-// gameBoard.addEventListener('click', playerMove)
-
-// onePiece.forEach((elem) =>{
-//   elem.addEventListener('click', selectPiece)
-// })
-
-// twoPiece.forEach((elem) =>{
-//   elem.addEventListener('click', selectPiece)
-// })
 
 sqInplay.forEach((elem) => {
   elem.addEventListener('click', playerMove)
 })
-
-// element.addEventListener('event',() => {    
-//   invokeMe();
-//   alsoInvokeMe();    
-// });
-
-// setTimeout accepts a callback & how long to wait before calling the cb
-// setTimeout(function() {
-//   colors.forEach(function(color, idx) {
-//     console.log(`${idx + 1} - ${color}`)
-//   })
-// }, 1000)  // 1000 milliseconds (1 sec)
 
 /*-------------------------------- Functions --------------------------------*/
 // init()
@@ -123,24 +95,19 @@ function resetPieceInfo(){
 function selectTheme(evt){
   console.log(evt.target.innerHTML)
   dropDownBtn.innerHTML = evt.target.innerHTML
-
 }
 
 function render(){
-
-  let name1 = playerName1.value
-  let name2 = playerName2.value
-  if (name1 === ''){
+  if (playerName1.value === ''){
     displayName1.innerHTML = 'Player 1'
   } else{
-    displayName1.innerHTML = name1
+    displayName1.innerHTML = playerName1.value
   }
-  if (name2 === ''){
+  if (playerName2.value === ''){
     displayName2.innerHTML = 'Player 2'
   } else{
-    displayName2.innerHTML = name2
+    displayName2.innerHTML = playerName2.value
   }
-  // document.querySelector('#player-2-name').innerHTML = name2
 
   sqInplay.forEach((elem) => {
     let num = elem.id
@@ -156,6 +123,7 @@ function render(){
       elem.innerHTML = ``
     }
   })
+
   if (turn === 1){  
     displayName1.style.color = 'red'
     displayName2.style.color = ''
@@ -166,98 +134,125 @@ function render(){
 }
 
 function playerMove(evt){
-  // evt.target.parentElement.classList.toggle('highlight')
-
   if (turn === 1){
     if (evt.target.className === 'one-piece'){
-      pieceId = evt.target.id
-      pieceFirstN = Number(pieceId[0])
-      pieceLastN = Number(pieceId[1])
-      console.log(pieceId, 'pieceId', pieceFirstN, 'first', pieceLastN, 'last')
-      resetHighlight(evt)
+      getPieceId(evt);
+      resetHighlight();
       evt.target.parentElement.classList.toggle('highlight')
     }
+
     if (evt.target.className === 'square inplay' && pieceId !== null){
-      console.log('test inplay square')
-      targetId = evt.target.id
-      targetFirstN = Number(targetId[0])
-      targetLastN = Number(targetId[1])
-      console.log(targetId, 'targId', targetFirstN, 'targFirst', targetLastN, 'targLast')
-      resetHighlight(evt)
-      moveP1Piece();
+      getTargetId(evt);
+      resetHighlight();
+      movePiece();
     }
-    // resetPieceInfo();
   } else {
     if (evt.target.className === 'two-piece'){
-      pieceId = evt.target.id
-      pieceFirstN = Number(pieceId[0])
-      pieceLastN = Number(pieceId[1])
-      console.log(pieceId, 'pieceId', pieceFirstN, 'first', pieceLastN, 'last')
-      resetHighlight(evt)
+      getPieceId(evt);
+      resetHighlight();
       evt.target.parentElement.classList.toggle('highlight')
     }
+
     if (evt.target.className === 'square inplay' && pieceId !== null){
-      console.log('test inplay square')
-      targetId = evt.target.id
-      targetFirstN = Number(targetId[0])
-      targetLastN = Number(targetId[1])
-      console.log(targetId, 'targId', targetFirstN, 'targFirst', targetLastN, 'targLast')
-      resetHighlight(evt)
-      moveP2Piece();
+      getTargetId(evt);
+      resetHighlight();
+      movePiece();
     }
   }
 }
 
-function moveP1Piece(){
-  if (pieceLastN % 2 === 0){
-    if (targetLastN === pieceLastN+1 && (targetFirstN === pieceFirstN || targetFirstN === pieceFirstN-1) && (boardArray[targetFirstN][targetLastN] === null)){
-      boardArray[targetFirstN][targetLastN] = 1;
-      boardArray[pieceFirstN][pieceLastN] = null;
-      turn *= -1
-      render();
-      resetPieceInfo();
-    } else{
-      resetPieceInfo();
-    }
-  }else {
-    if (targetLastN === pieceLastN+1 && (targetFirstN === pieceFirstN || targetFirstN === pieceFirstN+1)  && (boardArray[targetFirstN][targetLastN] === null)){
-      boardArray[targetFirstN][targetLastN] = 1;
-      boardArray[pieceFirstN][pieceLastN] = null;
-      turn *= -1
-      render();
-      resetPieceInfo();
-    } else{
-      resetPieceInfo();
-    }
-  }
+function getPieceId(evt){
+  pieceId = evt.target.id
+  pieceFirstN = Number(pieceId[0])
+  pieceLastN = Number(pieceId[1])
 }
 
-function moveP2Piece(){
-  if (pieceLastN % 2 === 0){
-    if (targetLastN === pieceLastN-1 && (targetFirstN === pieceFirstN || targetFirstN === pieceFirstN-1)  && (boardArray[targetFirstN][targetLastN] === null)){
-      boardArray[targetFirstN][targetLastN] = -1;
-      boardArray[pieceFirstN][pieceLastN] = null;
-      turn *= -1
-      render();
-      resetPieceInfo();
-    }
-  }else {
-    if (targetLastN === pieceLastN-1 && (targetFirstN === pieceFirstN || targetFirstN === pieceFirstN+1)  && (boardArray[targetFirstN][targetLastN] === null)){ 
-      boardArray[targetFirstN][targetLastN] = -1;
-      boardArray[pieceFirstN][pieceLastN] = null;
-      turn *= -1
-      render();
-      resetPieceInfo();
-    }
-  }
+function getTargetId(evt){
+  targetId = evt.target.id
+  targetFirstN = Number(targetId[0])
+  targetLastN = Number(targetId[1])
 }
 
-function resetHighlight(evt){
-  sqInplay.forEach((elem, idx) =>{
+function resetHighlight(){
+  sqInplay.forEach((elem) =>{
     elem.classList.remove('highlight')
   })
 }
 
-function jumpPiece(){
+function movePiece(){
+  if (pieceLastN % 2 === 0){
+    if (moveCondEven()){
+      updateBoard();
+    } else{
+      resetPieceInfo();
+    }
+  }else {
+    if (moveCondOdd()){
+      updateBoard();
+    } else{
+      resetPieceInfo();
+    }
+  }
+}
+
+function moveCondEven() {
+  if (targetLastN === (pieceLastN+turn) && (targetFirstN === pieceFirstN || targetFirstN === (pieceFirstN-1)) && (boardArray[targetFirstN][targetLastN] === null)){
+    return true
+  } else {
+    return false
+  }
+}
+
+function moveCondOdd() {
+  if (targetLastN === (pieceLastN+turn) && (targetFirstN === pieceFirstN || targetFirstN === (pieceFirstN+1)) && (boardArray[targetFirstN][targetLastN] === null)){
+    return true
+  } else {
+    return false
+  }
+}
+
+function updateBoard(){
+  boardArray[targetFirstN][targetLastN] = turn;
+  boardArray[pieceFirstN][pieceLastN] = null;
+  turn *= -1
+  render();
+  resetPieceInfo();
+}
+// function moveP2Piece(){
+//   if (pieceLastN % 2 === 0){
+//     if (targetLastN === pieceLastN-1 && (targetFirstN === pieceFirstN || targetFirstN === pieceFirstN-1)  && (boardArray[targetFirstN][targetLastN] === null)){
+//       boardArray[targetFirstN][targetLastN] = -1;
+//       boardArray[pieceFirstN][pieceLastN] = null;
+//       turn *= -1
+//       render();
+//       resetPieceInfo();
+//     } else{
+//       resetPieceInfo();
+//     }
+//   }else {
+//     if (targetLastN === pieceLastN-1 && (targetFirstN === pieceFirstN || targetFirstN === pieceFirstN+1)  && (boardArray[targetFirstN][targetLastN] === null)){ 
+//       boardArray[targetFirstN][targetLastN] = -1;
+//       boardArray[pieceFirstN][pieceLastN] = null;
+//       turn *= -1
+//       render();
+//       resetPieceInfo();
+//     } else{
+//       resetPieceInfo();
+//     }
+//   }
+// }
+
+
+function jumpP1Piece(){
+  if (targetLastN === pieceLastN+2 && (boardArray[targetFirstN][targetLastN] === null)){
+    if (boardArray[pieceFirstN][pieceLastN+1] === -1){
+      console.log('test jumping from smaller array to bigger array')
+    }else if (boardArray[pieceFirstN-1][pieceLastN+1] === -1){
+      console.log('test jumping from bigger array to smaller arr')
+    }
+  }
+}
+
+function jumpP2Piece(){
   
 }
