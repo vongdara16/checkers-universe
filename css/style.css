@@ -27,6 +27,13 @@ body {
   height: 100vh;
 }
 
+div.space {
+  background-image: url(../assets/space.jpeg);
+}
+
+body.earth {
+  background-image: url(../assets/earth.jpeg);
+}
 /* #start-screen {
   visibility: visible;
 } */

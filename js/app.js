@@ -7,10 +7,11 @@ let turn, winner, boardArray
 
 let pieceId, pieceFirstN, pieceLastN, targetId, targetFirstN, targetLastN
 
-
+let chosenTheme
 
 /*------------------------ Cached Element References ------------------------*/
 const gameTitle = document.querySelector('#game-title')
+const body = document.querySelector('body')
 
 const playerName1 = document.querySelector('#input-player1')
 const playerName2 = document.querySelector('#input-player2')
@@ -52,6 +53,7 @@ function firstScreenLoadUp(){
   gameTitle.classList.add('animate__fadeInDown')
   startScreen.classList.add('animate__fadeInDown')
   playScreen.classList.add('animate__fadeOutDown')
+  // body.classList.add('animate__fadeInDown')
   playScreen.setAttribute('hidden', true)
   
 }
@@ -61,11 +63,16 @@ function screenSwap(){
   startScreen.classList.toggle('animate__fadeOutUp')
   playScreen.classList.toggle('animate__fadeInUp')
   playScreen.classList.toggle('animate__fadeOutDown')
+  // body.classList.toggle('animate__fadeInDown')
+  // body.classList.toggle('animate__fadeOutUp')
   setTimeout(function(){
     playScreen.toggleAttribute('hidden')
     startScreen.toggleAttribute('hidden')
   }, 300)
-  
+
+  setTimeout(function(){
+    playScreen.classList.toggle(`${chosenTheme}`)
+  }, 1000)
 }
 
 function init(){
@@ -95,6 +102,8 @@ function resetPieceInfo(){
 function selectTheme(evt){
   console.log(evt.target.innerHTML)
   dropDownBtn.innerHTML = evt.target.innerHTML
+  chosenTheme = evt.target.innerHTML.toLowerCase()
+  console.log(chosenTheme)
 }
 
 function render(){
@@ -208,7 +217,7 @@ function moveCond(num) {
 function updateBoard(){
   boardArray[targetFirstN][targetLastN] = turn;
   boardArray[pieceFirstN][pieceLastN] = null;
-  turn *= -1
+  turn *= -1;
   render();
   resetPieceInfo();
 }
@@ -244,3 +253,4 @@ function jumpPieceOdd(){
     }
   }
 }
+
