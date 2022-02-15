@@ -140,6 +140,8 @@ function render(){
     displayName1.style.color = ''
     displayName2.style.color = 'red'
   }
+
+  winState();
 }
 
 function playerMove(evt){
@@ -254,3 +256,27 @@ function jumpPieceOdd(){
   }
 }
 
+function winState (){
+  let p1 = 0
+  let p2 = 0
+  boardArray.forEach((array, idx) => {
+    array.some((elem, i) => {
+      if (elem > 0){
+        p1++
+      } else if(elem < 0){
+        p2++
+      }
+    })
+  })
+  console.log(p1)
+  console.log(p2)
+}
+
+function getWinner (){
+  if (winner === 1){
+    console.log('winner 1')
+  }
+  if (winner === -1){
+    console.log('winner 2')
+  }
+}
