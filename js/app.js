@@ -142,6 +142,7 @@ function render(){
   }
 
   winState();
+  getWinner();
 }
 
 function playerMove(evt){
@@ -265,6 +266,11 @@ function winState (){
         p1++
       } else if(elem < 0){
         p2++
+      }
+      if (p1 === 0){
+        winner = -1
+      } else if (p2 === 0) {
+        winner = 1
       }
     })
   })
