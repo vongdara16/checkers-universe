@@ -181,13 +181,13 @@ function resetHighlight(){
 
 function movePiece(){
   if (pieceLastN % 2 === 0){
-    if (moveCondEven()){
+    if (moveCond(-1)){
       updateBoard();
     } else{
       resetPieceInfo();
     }
   }else {
-    if (moveCondOdd()){
+    if (moveCond(1)){
       updateBoard();
     } else{
       resetPieceInfo();
@@ -195,16 +195,8 @@ function movePiece(){
   }
 }
 
-function moveCondEven() {
-  if (targetLastN === (pieceLastN+turn) && (targetFirstN === pieceFirstN || targetFirstN === (pieceFirstN-1)) && (boardArray[targetFirstN][targetLastN] === null)){
-    return true
-  } else {
-    return false
-  }
-}
-
-function moveCondOdd() {
-  if (targetLastN === (pieceLastN+turn) && (targetFirstN === pieceFirstN || targetFirstN === (pieceFirstN+1)) && (boardArray[targetFirstN][targetLastN] === null)){
+function moveCond(num) {
+  if (targetLastN === (pieceLastN+turn) && (targetFirstN === pieceFirstN || targetFirstN === (pieceFirstN+num)) && (boardArray[targetFirstN][targetLastN] === null)){
     return true
   } else {
     return false
@@ -218,30 +210,6 @@ function updateBoard(){
   render();
   resetPieceInfo();
 }
-// function moveP2Piece(){
-//   if (pieceLastN % 2 === 0){
-//     if (targetLastN === pieceLastN-1 && (targetFirstN === pieceFirstN || targetFirstN === pieceFirstN-1)  && (boardArray[targetFirstN][targetLastN] === null)){
-//       boardArray[targetFirstN][targetLastN] = -1;
-//       boardArray[pieceFirstN][pieceLastN] = null;
-//       turn *= -1
-//       render();
-//       resetPieceInfo();
-//     } else{
-//       resetPieceInfo();
-//     }
-//   }else {
-//     if (targetLastN === pieceLastN-1 && (targetFirstN === pieceFirstN || targetFirstN === pieceFirstN+1)  && (boardArray[targetFirstN][targetLastN] === null)){ 
-//       boardArray[targetFirstN][targetLastN] = -1;
-//       boardArray[pieceFirstN][pieceLastN] = null;
-//       turn *= -1
-//       render();
-//       resetPieceInfo();
-//     } else{
-//       resetPieceInfo();
-//     }
-//   }
-// }
-
 
 function jumpP1Piece(){
   if (targetLastN === pieceLastN+2 && (boardArray[targetFirstN][targetLastN] === null)){
