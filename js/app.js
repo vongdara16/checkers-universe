@@ -103,6 +103,7 @@ function init(){
   render();
   resetPieceInfo();
   resetHighlight();
+  resetJumpable();
 }
 
 function resetPieceInfo(){
@@ -413,40 +414,77 @@ function getWinner(){
 function checkJump(){
   boardArray.forEach((array, i) => {
     array.forEach((elem, idx) => {
-      if (elem === turn){
+      if (elem === turn || elem === turn*2){
         if (i === 0){
           if (idx % 2 === 0){
-            if (array[idx+turn] === turn*-1){
-              console.log('test even check jump i = 0', idx, 'idx', i, 'i', elem, 'elem')  
-              // i think it works. this checks if the piece at array 0 is even so that it can jump to the right. for both directions and doesnt read anything to its left.
+            if (array[idx+turn] === turn*-1 || array[idx+turn] === turn*-2){
               if (boardArray[i+1][idx+turn*2] === null){
-                console.log('you can jump even', i+1, 'i + 1', idx+turn*2, 'idx + turn*2')
-                document.getElementById(`${i+1}${idx+turn*2}`).classList.toggle('jumpable')
-                // console.log(document.getElementById(`${i+1}${idx+turn*2}`).classList)
+                document.getElementById(`${i+1}${idx+turn*2}`).classList.add('jumpable')
+                // if array 0 and even highlight to the right
               }
             }
           } else {
             if (boardArray[i+1][idx+turn] === turn*-1){
-              console.log('test odd check jump i = 0', idx, 'idx', i, 'i', elem, 'elem')
-              
               if (boardArray[i+1][idx+turn*2] === null){
-                console.log('you can jump odd ', i+1, 'i + 1', idx+turn*2, 'idx + turn*2')
-                document.getElementById(`${i+1}${idx+turn*2}`).classList.toggle('jumpable')
+                document.getElementById(`${i+1}${idx+turn*2}`).classList.add('jumpable')
+                // if array 0 and odd highlight to the right
               }
             }
           }
         } else if (i === 3){
-
+          if (idx % 2 === 0){
+            if (boardArray[i-1][idx+turn] === turn*-1){
+              if (boardArray[i-1][idx+turn*2] === null){
+                document.getElementById(`${i-1}${idx+turn*2}`).classList.add('jumpable')
+                // if array 3 and even highlight to the left
+              }
+            }
+          } else {
+            if (array[idx+turn] === turn*-1  || array[idx+turn] === turn*-2){
+              if (boardArray[i-1][idx+turn*2] === null){
+                document.getElementById(`${i-1}${idx+turn*2}`).classList.add('jumpable')
+                // if array 3 and odd highlight to the left
+              }
+            }
+          }
         } else {
-          // if (array[idx+turn] === turn*-1){ // checks if value in the same array is the opposing piece
-          //   console.log('test check jump')
-          // }
+          if (idx % 2 === 0){
+            if (boardArray[i-1][idx+turn] === turn*-1){
+              if (boardArray[i-1][idx+turn*2] === null){
+                document.getElementById(`${i-1}${idx+turn*2}`).classList.add('jumpable')
+                // if array 1-2 and even highlight to the left
+              }
+            }
+            if (array[idx+turn] === turn*-1  || array[idx+turn] === turn*-2){
+              if (boardArray[i+1][idx+turn*2] === null){
+                document.getElementById(`${i+1}${idx+turn*2}`).classList.add('jumpable')
+                // if array 1-2 and even highlight to the right
+              }
+            }
+          } else {
+            if (array[idx+turn] === turn*-1  || array[idx+turn] === turn*-2){
+              if (boardArray[i-1][idx+turn*2] === null){
+                document.getElementById(`${i-1}${idx+turn*2}`).classList.add('jumpable')
+                // if array 1-2 and odd highlight to the left
+              }
+            }
+            if (boardArray[i+1][idx+turn] === turn*-1){
+              if (boardArray[i+1][idx+turn*2] === null){
+                document.getElementById(`${i+1}${idx+turn*2}`).classList.add('jumpable')
+                // if array 1-2 and odd highlight to the right
+              }
+            }
+          }
         }
       }
     })
   })
 }
-
+              // i think it works. this checks if the piece at array 0 is even so that it can jump to the right. for both directions and doesnt read anything to its left.
+                // console.log(document.getElementById(`${i+1}${idx+turn*2}`).classList)
+                // console.log('you can jump even', i+1, 'i + 1', idx+turn*2, 'idx + turn*2')
+                // console.log('test even check jump i = 0', idx, 'idx', i, 'i', elem, 'elem')  
+                
 // boardArray = [
 //   [1, 1, 1, null, null, -1, -1, -1],  // array 0
 //   [1, 1, 1, null, null, -1, -1, -1],  // array 1
