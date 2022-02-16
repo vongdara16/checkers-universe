@@ -9,6 +9,8 @@ let pieceId, pieceFirstN, pieceLastN, targetId, targetFirstN, targetLastN
 
 let chosenTheme
 
+let p1Pieces, p2Pieces
+
 /*------------------------ Cached Element References ------------------------*/
 const gameTitle = document.querySelector('#game-title')
 const body = document.querySelector('body')
@@ -22,7 +24,7 @@ const startScreen = document.querySelector('#start-screen')
 
 const startMenuBtn = document.querySelector('#start-menu-btn')
 const resetBtn = document.querySelector('#reset-btn')
-const gameBoard = document.querySelector('#game-board')
+const gameBoard = document.querySelector('#game-board') // may not be needed
 const sqInplay = document.querySelectorAll('.inplay')
 const playScreen = document.querySelector('#play-screen')
 const displayName1 = document.querySelector('#display-name-1')
@@ -79,11 +81,13 @@ function init(){
   turn = 1
   winner = null
   boardArray = [
-    [1, 1, 1, null, null, -1, -1, -1],  // array 0
-    [1, 1, 1, null, null, -1, -1, -1],  // array 1
-    [1, 1, 1, null, null, -1, -1, -1],  // array 2
-    [1, 1, 1, null, null, -1, -1, -1]   // array 3
+    [null, null, 1, null, null, -1, -1, -1],  // array 0
+    [null, null, null, null, null, -1, -1, -1],  // array 1
+    [null, null, null, null, null, -1, -1, -1],  // array 2
+    [null, null, null, null, null, -1, -1, -1]   // array 3
   ]
+  p1Pieces = 1
+  p2Pieces = -12
   console.log('test init')
   render();
   resetPieceInfo();
@@ -141,8 +145,18 @@ function render(){
     displayName2.style.color = 'red'
   }
 
-  winState();
+  // winState();
   getWinner();
+}
+
+function boardState(){
+  boardArray.forEach((array, i) => {
+    array.forEach((elem, idx) => {
+      if (elem > 0){
+
+      }
+    })
+  })
 }
 
 function playerMove(evt){
@@ -230,11 +244,13 @@ function jumpPieceEven(){
     console.log('test if board elem is null for jumping')
     if (targetFirstN === pieceFirstN-1 && boardArray[targetFirstN][targetLastN-turn] === (turn*-1)){
       boardArray[targetFirstN][targetLastN-turn] = null;
+      pieceCount();
       updateBoard();
       // even last num jumping left
     }
     if (targetFirstN === pieceFirstN+1 && boardArray[pieceFirstN][pieceLastN+turn] === (turn*-1)){
       boardArray[pieceFirstN][pieceLastN+turn] = null;
+      pieceCount();
       updateBoard();
       // even last num jumping right
     }
@@ -246,43 +262,76 @@ function jumpPieceOdd(){
     console.log('test if board elem is null for jumping')
     if (targetFirstN === pieceFirstN-1 && boardArray[pieceFirstN][pieceLastN+turn] === (turn*-1)){
       boardArray[pieceFirstN][pieceLastN+turn] = null;
+      pieceCount();
       updateBoard();
       // odd last num jumping left
     }
     if (targetFirstN === pieceFirstN+1 && boardArray[targetFirstN][targetLastN-turn] === (turn*-1)){
       boardArray[targetFirstN][targetLastN-turn] = null;
+      pieceCount();
       updateBoard();
       // odd last num jumping right
     }
   }
 }
 
-function winState (){
-  let p1 = 0 
-  let p2 = 0
-  boardArray.forEach((array, idx) => {
-    array.some((elem, i) => {
-      if (elem > 0){
-        p1++
-      } else if(elem < 0){
-        p2++
-      }
-      if (p1 === 0){
-        winner = -1
-      } else if (p2 === 0) {
-        winner = 1
-      }
-    })
-  })
-  console.log(p1)
-  console.log(p2)
+function pieceCount(){
+  if (turn === 1){
+    p2Pieces++
+  }
+  if (turn === -1){
+    p1Pieces--
+  }
+  console.log(p1Pieces, 'p1 pieces', p2Pieces, 'p2 pieces')
 }
 
-function getWinner (){
-  if (winner === 1){
-    console.log('winner 1')
+function getWinner(){
+  if (p1Pieces === 0){
+    winner = -1
+    displayName2.style.color = 'gold'
+    displayName1.style.color = ''
+  } else if (p2Pieces === 0){
+    winner = 1
+    displayName1.style.color = 'gold'
+    displayName2.style.color = ''
   }
-  if (winner === -1){
-    console.log('winner 2')
-  }
+  // ^^ move the style changes later
+  // console.log('winner is ', winner)
 }
+
+
+// function winState (){
+//   let p1 = 0 
+//   let p2 = 0
+//   boardArray.forEach((array, idx) => {
+//     array.some((elem, i) => {
+//       if (elem > 0){
+//         p1++
+//       } else if(elem < 0){
+//         p2++
+//       }
+//       if (p1 === 0){
+//         winner = -1
+//       } else if (p2 === 0) {
+//         winner = 1
+//       }
+//     })
+//     array.forEach((elem, i) => {
+//       if (elem === 1 && i === 7){
+//         console.log('king me')
+//       }
+//     })
+//   })
+//   console.log(p1)
+//   console.log(p2)
+// }
+
+// function getWinner (){
+//   if (winner === 1){
+//     console.log('winner 1')
+//   }
+//   if (winner === -1){
+//     console.log('winner 2')
+//   }
+// }
+
