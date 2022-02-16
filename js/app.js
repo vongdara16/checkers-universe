@@ -80,6 +80,13 @@ function screenSwap(){
   }, 1000)
 }
 
+function selectTheme(evt){
+  console.log(evt.target.innerHTML)
+  dropDownBtn.innerHTML = evt.target.innerHTML
+  chosenTheme = evt.target.innerHTML.toLowerCase()
+  console.log(chosenTheme)
+}
+
 function init(){
   turn = 1
   winner = null
@@ -89,6 +96,7 @@ function init(){
     [1, 1, 1, null, null, -1, -1, -1],  // array 2
     [1, 1, 1, null, null, -1, -1, -1]   // array 3
   ]
+  // console.log(boardArray)
   p1Pieces = 12
   p2Pieces = -12
   console.log('test init')
@@ -104,13 +112,6 @@ function resetPieceInfo(){
   targetId = null
   targetFirstN = null
   targetLastN = null
-}
-
-function selectTheme(evt){
-  console.log(evt.target.innerHTML)
-  dropDownBtn.innerHTML = evt.target.innerHTML
-  chosenTheme = evt.target.innerHTML.toLowerCase()
-  console.log(chosenTheme)
 }
 
 function render(){
@@ -154,23 +155,8 @@ function render(){
     displayName2.style.color = 'red'
   }
 
-  // kingMe();
+  checkJump();
   getWinner();
-}
-
-function kingMe(){
-  boardArray.forEach((array, i) => {
-    array.forEach((elem, idx) => {
-      if (elem === 1 && idx === 7){
-        boardArray[i][idx] = 2
-        console.log('king me')
-      }
-      if (elem === -1 && idx === 0){
-        boardArray[i][idx] = -2
-        console.log('im king')
-      }
-    })
-  })
 }
 
 function playerMove(evt){
@@ -262,24 +248,6 @@ function movePiece(){
   }
 }
 
-function moveKingCond(num){
-  if ((targetLastN === (pieceLastN+turn) || targetLastN === (pieceLastN-turn)) &&(targetFirstN === pieceFirstN || targetFirstN === (pieceFirstN+num)) && (boardArray[targetFirstN][targetLastN] === null)){
-    console.log('king is true')
-    return true
-  } else {
-    console.log('king is false')
-    return false
-  }
-}
-
-function moveCond(num) {
-  if (targetLastN === (pieceLastN+turn) && (targetFirstN === pieceFirstN || targetFirstN === (pieceFirstN+num)) && (boardArray[targetFirstN][targetLastN] === null)){
-    return true
-  } else {
-    return false
-  }
-}
-
 function updateBoard(){
   if (boardArray[pieceFirstN][pieceLastN] === 2 || boardArray[pieceFirstN][pieceLastN] === -2 ){
     boardArray[targetFirstN][targetLastN] = turn*2;
@@ -294,6 +262,39 @@ function updateBoard(){
     kingMe();
     render();
     resetPieceInfo();
+  }
+}
+
+function kingMe(){
+  boardArray.forEach((array, i) => {
+    array.forEach((elem, idx) => {
+      if (elem === 1 && idx === 7){
+        boardArray[i][idx] = 2
+        console.log('king me')
+      }
+      if (elem === -1 && idx === 0){
+        boardArray[i][idx] = -2
+        console.log('im king')
+      }
+    })
+  })
+}
+
+function moveCond(num) {
+  if (targetLastN === (pieceLastN+turn) && (targetFirstN === pieceFirstN || targetFirstN === (pieceFirstN+num)) && (boardArray[targetFirstN][targetLastN] === null)){
+    return true
+  } else {
+    return false
+  }
+}
+
+function moveKingCond(num){
+  if ((targetLastN === (pieceLastN+turn) || targetLastN === (pieceLastN-turn)) &&(targetFirstN === pieceFirstN || targetFirstN === (pieceFirstN+num)) && (boardArray[targetFirstN][targetLastN] === null)){
+    console.log('king is true')
+    return true
+  } else {
+    console.log('king is false')
+    return false
   }
 }
 
@@ -382,6 +383,7 @@ function pieceCount(){
     p1Pieces--
   }
   console.log(p1Pieces, 'p1 pieces', p2Pieces, 'p2 pieces')
+  // possibly simplify by both values equal positive 12. maybe
 }
 
 function getWinner(){
@@ -398,3 +400,41 @@ function getWinner(){
   // console.log('winner is ', winner)
 }
 
+/**
+ * checking for jump to force it
+ * if turn is player 1 (1)
+ * iterate through the board array with for each (array, index)
+ * then use map to create new nested arrays 
+ * the new nested array will be of the rows instead of columns like the orig.
+ * 
+ * 
+ */
+// console.log(sqInplay)
+// console.log(boardArray)
+
+function checkJump(){
+  boardArray.forEach((array, i) => {
+    array.forEach((elem, idx) => {
+      if (elem === turn){
+        if (i === 0){
+          if (array[idx+turn] === turn*-1 && (idx % 2 === 0)){
+            console.log('test check jump i = 0', idx, 'idx', i, 'i', elem, 'elem')  // i think it works. this checks if the piece at array 0 is even so that it can jump to the right. for both directions and doesnt read anything to its left.
+          }
+        } else if (i === 3){
+
+        } else {
+          // if (array[idx+turn] === turn*-1){ // checks if value in the same array is the opposing piece
+          //   console.log('test check jump')
+          // }
+        }
+      }
+    })
+  })
+}
+
+// boardArray = [
+//   [1, 1, 1, null, null, -1, -1, -1],  // array 0
+//   [1, 1, 1, null, null, -1, -1, -1],  // array 1
+//   [1, 1, 1, null, null, -1, -1, -1],  // array 2
+//   [1, 1, 1, null, null, -1, -1, -1]   // array 3
+// ]

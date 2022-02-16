@@ -121,3 +121,7 @@ div.two-king {
 div.highlight {
   border: 2px solid red;
 }
+
+btns {
+  display: flex;
+}
