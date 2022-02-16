@@ -87,10 +87,10 @@ function init(){
   turn = 1
   winner = null
   boardArray = [
-    [1, 1, 1, null, null, -1, -1, null],  // array 0
-    [1, 1, 1, null, null, -1, 1, null],  // array 1
-    [null, 1, 1, null, null, -1, -1, -1],  // array 2
-    [null, -1, 1, null, null, -1, -1, -1]   // array 3
+    [1, 1, 1, null, null, -1, -1, -1],  // array 0
+    [1, 1, 1, null, null, -1, -1, -1],  // array 1
+    [1, 1, 1, null, null, -1, -1, -1],  // array 2
+    [1, 1, 1, null, null, -1, -1, -1]   // array 3
   ]
   p1Pieces = 12
   p2Pieces = -12
@@ -211,14 +211,14 @@ function getPieceId(evt){
   pieceId = evt.target.id
   pieceFirstN = Number(pieceId[0])
   pieceLastN = Number(pieceId[1])
-  console.log(pieceFirstN, 'pfirst', pieceLastN, 'plast')
+  // console.log(pieceFirstN, 'pfirst', pieceLastN, 'plast')
 }
 
 function getTargetId(evt){
   targetId = evt.target.id
   targetFirstN = Number(targetId[0])
   targetLastN = Number(targetId[1])
-  console.log(targetFirstN, 'tfirst', targetLastN, 'tlast')
+  // console.log(targetFirstN, 'tfirst', targetLastN, 'tlast')
 }
 
 function resetHighlight(){
@@ -232,15 +232,19 @@ function movePiece(){
     if (pieceLastN % 2 === 0){
       if (moveKingCond(-1)){
         updateBoard();
-      } else{
+      } else if (jumpKingCond()){
         jumpPieceEven();
+        jumpKingEven();
+      } else {
         resetPieceInfo();
       }
     }else {
       if (moveKingCond(1)){
         updateBoard();
-      } else{
+      } else if (jumpKingCond()){
         jumpPieceOdd();
+        jumpKingOdd();
+      } else {
         resetPieceInfo();
       }
     }
@@ -248,15 +252,17 @@ function movePiece(){
     if (pieceLastN % 2 === 0){
       if (moveCond(-1)){
         updateBoard();
-      } else{
+      } else if (jumpCond()){
         jumpPieceEven();
+      } else {
         resetPieceInfo();
       }
     }else {
       if (moveCond(1)){
         updateBoard();
-      } else{
+      } else if (jumpCond()){
         jumpPieceOdd();
+      } else {
         resetPieceInfo();
       }
     }
@@ -283,8 +289,10 @@ function movePiece(){
 
 function moveKingCond(num){
   if ((targetLastN === (pieceLastN+turn) || targetLastN === (pieceLastN-turn)) &&(targetFirstN === pieceFirstN || targetFirstN === (pieceFirstN+num)) && (boardArray[targetFirstN][targetLastN] === null)){
+    console.log('king is true')
     return true
   } else {
+    console.log('king is false')
     return false
   }
 }
@@ -314,39 +322,80 @@ function updateBoard(){
   }
 }
 
-function jumpPieceEven(){
+function jumpCond(){
   if ((boardArray[targetFirstN][targetLastN] === null) && (targetLastN === pieceLastN+(turn*2)) && (targetFirstN === pieceFirstN+1 || targetFirstN === pieceFirstN-1)){
-    console.log('test if board elem is null for jumping')
-    if (targetFirstN === pieceFirstN-1 && boardArray[targetFirstN][targetLastN-turn] === (turn*-1)){
-      boardArray[targetFirstN][targetLastN-turn] = null;
-      pieceCount();
-      updateBoard();
-      // even last num jumping left
-    }
-    if (targetFirstN === pieceFirstN+1 && boardArray[pieceFirstN][pieceLastN+turn] === (turn*-1)){
-      boardArray[pieceFirstN][pieceLastN+turn] = null;
-      pieceCount();
-      updateBoard();
-      // even last num jumping right
-    }
+    return true
+  } else {
+    return false
+  }
+}
+function jumpKingCond(){
+  if ((boardArray[targetFirstN][targetLastN] === null) && (targetLastN === pieceLastN+(turn*2) || targetLastN === pieceLastN-(turn*2)) && (targetFirstN === pieceFirstN+1 || targetFirstN === pieceFirstN-1)){
+    console.log('jking is true')
+    return true
+  } else {
+    console.log('jking is false')
+    return false
+  }
+}
+
+function jumpPieceEven(){
+  if (targetFirstN === pieceFirstN-1 && (boardArray[targetFirstN][targetLastN-turn] === (turn*-1) || boardArray[targetFirstN][targetLastN-turn] === (turn*-2))){
+    boardArray[targetFirstN][targetLastN-turn] = null;
+    pieceCount();
+    updateBoard();
+    // even last num jumping left
+  }
+  if (targetFirstN === pieceFirstN+1 && (boardArray[pieceFirstN][pieceLastN+turn] === (turn*-1) || boardArray[pieceFirstN][pieceLastN+turn] === (turn*-2))){
+    boardArray[pieceFirstN][pieceLastN+turn] = null;
+    pieceCount();
+    updateBoard();
+    // even last num jumping right
   }
 }
 
 function jumpPieceOdd(){
-  if ((boardArray[targetFirstN][targetLastN] === null) && (targetLastN === pieceLastN+(turn*2)) && (targetFirstN === pieceFirstN+1 || targetFirstN === pieceFirstN-1)){
-    console.log('test if board elem is null for jumping')
-    if (targetFirstN === pieceFirstN-1 && boardArray[pieceFirstN][pieceLastN+turn] === (turn*-1)){
-      boardArray[pieceFirstN][pieceLastN+turn] = null;
-      pieceCount();
-      updateBoard();
-      // odd last num jumping left
-    }
-    if (targetFirstN === pieceFirstN+1 && boardArray[targetFirstN][targetLastN-turn] === (turn*-1)){
-      boardArray[targetFirstN][targetLastN-turn] = null;
-      pieceCount();
-      updateBoard();
-      // odd last num jumping right
-    }
+  if (targetFirstN === pieceFirstN-1 && (boardArray[pieceFirstN][pieceLastN+turn] === (turn*-1) || boardArray[pieceFirstN][pieceLastN+turn] === (turn*-2))){
+    boardArray[pieceFirstN][pieceLastN+turn] = null;
+    pieceCount();
+    updateBoard();
+    // odd last num jumping left
+  }
+  if (targetFirstN === pieceFirstN+1 && (boardArray[targetFirstN][targetLastN-turn] === (turn*-1) || boardArray[targetFirstN][targetLastN-turn] === (turn*-2))){
+    boardArray[targetFirstN][targetLastN-turn] = null;
+    pieceCount();
+    updateBoard();
+    // odd last num jumping right
+  }
+}
+
+function jumpKingEven(){
+  if (targetFirstN === pieceFirstN-1 && (boardArray[targetFirstN][targetLastN+turn] === (turn*-1) || boardArray[targetFirstN][targetLastN+turn] === (turn*-2))){
+    boardArray[targetFirstN][targetLastN+turn] = null;
+    pieceCount();
+    updateBoard();
+    // king even jump down left
+  }
+  if (targetFirstN === pieceFirstN+1 && (boardArray[pieceFirstN][pieceLastN-turn] === (turn*-1) || boardArray[pieceFirstN][pieceLastN-turn] === (turn*-2))){
+    boardArray[pieceFirstN][pieceLastN-turn] = null;
+    pieceCount();
+    updateBoard();
+    // king even jump down right
+  }
+}
+
+function jumpKingOdd(){
+  if (targetFirstN === pieceFirstN-1 && (boardArray[pieceFirstN][pieceLastN-turn] === (turn*-1) || boardArray[pieceFirstN][pieceLastN-turn] === (turn*-2))){
+    boardArray[pieceFirstN][pieceLastN-turn] = null;
+    pieceCount();
+    updateBoard();
+    // king odd jump down left
+  }
+  if (targetFirstN === pieceFirstN+1 && (boardArray[targetFirstN][targetLastN+turn] === (turn*-1) || boardArray[pieceFirstN][pieceLastN+turn] === (turn*-2))){
+    boardArray[targetFirstN][targetLastN+turn] = null;
+    pieceCount();
+    updateBoard();
+    // king odd jump down right
   }
 }
 
