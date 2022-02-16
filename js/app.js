@@ -11,6 +11,8 @@ let chosenTheme
 
 let p1Pieces, p2Pieces
 
+let pieceClass
+
 /*------------------------ Cached Element References ------------------------*/
 const gameTitle = document.querySelector('#game-title')
 const body = document.querySelector('body')
@@ -85,10 +87,10 @@ function init(){
   turn = 1
   winner = null
   boardArray = [
-    [1, 1, 1, null, null, -1, -1, -1],  // array 0
-    [1, 1, 1, null, null, -1, null, 1],  // array 1
-    [1, 1, 1, null, null, -1, null, -1],  // array 2
-    [1, 1, 1, null, null, -1, -1, -1]   // array 3
+    [1, 1, 1, null, null, -1, -1, null],  // array 0
+    [1, 1, 1, null, null, -1, 1, null],  // array 1
+    [null, 1, 1, null, null, -1, -1, -1],  // array 2
+    [null, -1, 1, null, null, -1, -1, -1]   // array 3
   ]
   p1Pieces = 12
   p2Pieces = -12
@@ -139,6 +141,12 @@ function render(){
     if (boardArray[firstN][lastN] === null){
       elem.innerHTML = ``
     }
+    if (boardArray[firstN][lastN] === 2){
+      elem.innerHTML = `<div class="one-king" id="${firstN}${lastN}">${firstN}${lastN}</div>`
+    }
+    if (boardArray[firstN][lastN] === -2){
+      elem.innerHTML = `<div class="two-king" id="${firstN}${lastN}">${firstN}${lastN}</div>`
+    }
   })
 
   if (turn === 1){  
@@ -149,7 +157,7 @@ function render(){
     displayName2.style.color = 'red'
   }
 
-  kingMe();
+  // kingMe();
   getWinner();
 }
 
@@ -157,14 +165,15 @@ function kingMe(){
   boardArray.forEach((array, i) => {
     array.forEach((elem, idx) => {
       if (elem === 1 && idx === 7){
-        document.getElementById(`${i}${idx}`).innerHTML = `<div class="one-king" id="${i}${idx}">${i}K${idx}</div>`
+        // document.getElementById(`${i}${idx}`).innerHTML = `<div class="one-king" id="${i}${idx}">K${i}${idx}</div>`
+        boardArray[i][idx] = 2
         console.log('king me')
       }
       if (elem === -1 && idx === 0){
-        document.getElementById(`${i}${idx}`).innerHTML = `<div class="two-king" id="${i}${idx}">${i}K${idx}</div>`
-        console.log('king me')
+        // document.getElementById(`${i}${idx}`).innerHTML = `<div class="two-king" id="${i}${idx}">K${i}${idx}</div>`
+        boardArray[i][idx] = -2
+        console.log('im king')
       }
-
     })
   })
 }
@@ -183,7 +192,7 @@ function playerMove(evt){
       movePiece();
     }
   } else {
-    if (evt.target.className === 'two-piece'){
+    if (evt.target.className === 'two-piece' || evt.target.className === 'two-king'){
       getPieceId(evt);
       resetHighlight(evt);
       evt.target.parentElement.classList.toggle('highlight')
@@ -198,15 +207,18 @@ function playerMove(evt){
 }
 
 function getPieceId(evt){
+  pieceClass = evt.target.className
   pieceId = evt.target.id
   pieceFirstN = Number(pieceId[0])
   pieceLastN = Number(pieceId[1])
+  console.log(pieceFirstN, 'pfirst', pieceLastN, 'plast')
 }
 
 function getTargetId(evt){
   targetId = evt.target.id
   targetFirstN = Number(targetId[0])
   targetLastN = Number(targetId[1])
+  console.log(targetFirstN, 'tfirst', targetLastN, 'tlast')
 }
 
 function resetHighlight(){
@@ -216,25 +228,65 @@ function resetHighlight(){
 }
 
 function movePiece(){
-  if (pieceLastN % 2 === 0){
-    if (moveCond(-1)){
-      updateBoard();
-    } else{
-      jumpPieceEven();
-      resetPieceInfo();
+  if (pieceClass === 'one-king' || pieceClass === 'two-king'){
+    if (pieceLastN % 2 === 0){
+      if (moveKingCond(-1)){
+        updateBoard();
+      } else{
+        jumpPieceEven();
+        resetPieceInfo();
+      }
+    }else {
+      if (moveKingCond(1)){
+        updateBoard();
+      } else{
+        jumpPieceOdd();
+        resetPieceInfo();
+      }
     }
-  }else {
-    if (moveCond(1)){
-      updateBoard();
-    } else{
-      jumpPieceOdd();
-      resetPieceInfo();
+  } else {
+    if (pieceLastN % 2 === 0){
+      if (moveCond(-1)){
+        updateBoard();
+      } else{
+        jumpPieceEven();
+        resetPieceInfo();
+      }
+    }else {
+      if (moveCond(1)){
+        updateBoard();
+      } else{
+        jumpPieceOdd();
+        resetPieceInfo();
+      }
     }
   }
 }
 
-function moveKing(){
-  
+// function moveKing(){
+//   if (pieceLastN % 2 === 0){
+//     if (moveKingCond(-1)){
+//       updateBoard();
+//     } else{
+//       jumpPieceEven();
+//       resetPieceInfo();
+//     }
+//   }else {
+//     if (moveKingCond(1)){
+//       updateBoard();
+//     } else{
+//       jumpPieceOdd();
+//       resetPieceInfo();
+//     }
+//   }
+// }
+
+function moveKingCond(num){
+  if ((targetLastN === (pieceLastN+turn) || targetLastN === (pieceLastN-turn)) &&(targetFirstN === pieceFirstN || targetFirstN === (pieceFirstN+num)) && (boardArray[targetFirstN][targetLastN] === null)){
+    return true
+  } else {
+    return false
+  }
 }
 
 function moveCond(num) {
@@ -246,11 +298,20 @@ function moveCond(num) {
 }
 
 function updateBoard(){
-  boardArray[targetFirstN][targetLastN] = turn;
-  boardArray[pieceFirstN][pieceLastN] = null;
-  turn *= -1;
-  render();
-  resetPieceInfo();
+  if (boardArray[pieceFirstN][pieceLastN] === 2 || boardArray[pieceFirstN][pieceLastN] === -2 ){
+    boardArray[targetFirstN][targetLastN] = turn*2;
+    boardArray[pieceFirstN][pieceLastN] = null;
+    turn *= -1;
+    render();
+    resetPieceInfo();
+  } else {
+    boardArray[targetFirstN][targetLastN] = turn;
+    boardArray[pieceFirstN][pieceLastN] = null;
+    turn *= -1;
+    kingMe();
+    render();
+    resetPieceInfo();
+  }
 }
 
 function jumpPieceEven(){
