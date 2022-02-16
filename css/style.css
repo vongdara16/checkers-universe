@@ -41,12 +41,18 @@ body.earth {
   text-align: center;
 }
 
+div#play-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 section#game-board {
   /* visibility: hidden; */
   display: grid;
-  grid-template-rows: repeat(8, 5vmin);
-  grid-template-columns: repeat(8, 5vmin);
+  grid-template-rows: repeat(8, 7vmin);
+  grid-template-columns: repeat(8, 7vmin);
   grid-gap: 0vmin;
   /* position: absolute;
   top: 50%;

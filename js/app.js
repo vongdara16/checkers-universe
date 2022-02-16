@@ -86,8 +86,8 @@ function init(){
   winner = null
   boardArray = [
     [1, 1, 1, null, null, -1, -1, -1],  // array 0
-    [1, 1, 1, null, null, -1, -1, -1],  // array 1
-    [1, 1, 1, null, null, -1, -1, -1],  // array 2
+    [1, 1, 1, null, null, -1, null, 1],  // array 1
+    [1, 1, 1, null, null, -1, null, -1],  // array 2
     [1, 1, 1, null, null, -1, -1, -1]   // array 3
   ]
   p1Pieces = 12
@@ -171,7 +171,7 @@ function kingMe(){
 
 function playerMove(evt){
   if (turn === 1){
-    if (evt.target.className === 'one-piece'){
+    if (evt.target.className === 'one-piece' || evt.target.className === 'one-king'){
       getPieceId(evt);
       resetHighlight();
       evt.target.parentElement.classList.toggle('highlight')
@@ -231,6 +231,10 @@ function movePiece(){
       resetPieceInfo();
     }
   }
+}
+
+function moveKing(){
+  
 }
 
 function moveCond(num) {
