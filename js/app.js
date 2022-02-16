@@ -32,9 +32,6 @@ const playScreen = document.querySelector('#play-screen')
 const displayName1 = document.querySelector('#display-name-1')
 const displayName2 = document.querySelector('#display-name-2')
 
-// const oneP = document.querySelectorAll('.one-piece')
-
-
 
 /*----------------------------- Event Listeners -----------------------------*/
 playBtn.addEventListener('click', () => {
@@ -165,12 +162,10 @@ function kingMe(){
   boardArray.forEach((array, i) => {
     array.forEach((elem, idx) => {
       if (elem === 1 && idx === 7){
-        // document.getElementById(`${i}${idx}`).innerHTML = `<div class="one-king" id="${i}${idx}">K${i}${idx}</div>`
         boardArray[i][idx] = 2
         console.log('king me')
       }
       if (elem === -1 && idx === 0){
-        // document.getElementById(`${i}${idx}`).innerHTML = `<div class="two-king" id="${i}${idx}">K${i}${idx}</div>`
         boardArray[i][idx] = -2
         console.log('im king')
       }
@@ -211,14 +206,12 @@ function getPieceId(evt){
   pieceId = evt.target.id
   pieceFirstN = Number(pieceId[0])
   pieceLastN = Number(pieceId[1])
-  // console.log(pieceFirstN, 'pfirst', pieceLastN, 'plast')
 }
 
 function getTargetId(evt){
   targetId = evt.target.id
   targetFirstN = Number(targetId[0])
   targetLastN = Number(targetId[1])
-  // console.log(targetFirstN, 'tfirst', targetLastN, 'tlast')
 }
 
 function resetHighlight(){
@@ -268,24 +261,6 @@ function movePiece(){
     }
   }
 }
-
-// function moveKing(){
-//   if (pieceLastN % 2 === 0){
-//     if (moveKingCond(-1)){
-//       updateBoard();
-//     } else{
-//       jumpPieceEven();
-//       resetPieceInfo();
-//     }
-//   }else {
-//     if (moveKingCond(1)){
-//       updateBoard();
-//     } else{
-//       jumpPieceOdd();
-//       resetPieceInfo();
-//     }
-//   }
-// }
 
 function moveKingCond(num){
   if ((targetLastN === (pieceLastN+turn) || targetLastN === (pieceLastN-turn)) &&(targetFirstN === pieceFirstN || targetFirstN === (pieceFirstN+num)) && (boardArray[targetFirstN][targetLastN] === null)){
