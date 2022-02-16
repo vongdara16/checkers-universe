@@ -121,6 +121,9 @@ div.two-king {
 div.highlight {
   border: 2px solid red;
 }
+div.jumpable {
+  border: 2px solid pink;
+}
 
 btns {
   display: flex;

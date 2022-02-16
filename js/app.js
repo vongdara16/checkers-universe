@@ -169,19 +169,20 @@ function playerMove(evt){
     
     if (evt.target.className === 'square inplay' && pieceId !== null){
       getTargetId(evt);
-      resetHighlight(evt);
+      resetHighlight();
       movePiece();
+      // resetJumpable();
     }
   } else {
     if (evt.target.className === 'two-piece' || evt.target.className === 'two-king'){
       getPieceId(evt);
-      resetHighlight(evt);
+      resetHighlight();
       evt.target.parentElement.classList.toggle('highlight')
     }
     
     if (evt.target.className === 'square inplay' && pieceId !== null){
       getTargetId(evt);
-      resetHighlight(evt);
+      resetHighlight();
       movePiece();
     }
   }
@@ -206,23 +207,33 @@ function resetHighlight(){
   })
 }
 
+function resetJumpable(){
+  sqInplay.forEach((elem) =>{
+    elem.classList.remove('jumpable')
+  })
+}
+
 function movePiece(){
   if (pieceClass === 'one-king' || pieceClass === 'two-king'){
     if (pieceLastN % 2 === 0){
       if (moveKingCond(-1)){
         updateBoard();
+        // resetJumpable();
       } else if (jumpKingCond()){
         jumpPieceEven();
         jumpKingEven();
+        // resetJumpable();
       } else {
         resetPieceInfo();
       }
     }else {
       if (moveKingCond(1)){
         updateBoard();
+        // resetJumpable();
       } else if (jumpKingCond()){
         jumpPieceOdd();
         jumpKingOdd();
+        // resetJumpable();
       } else {
         resetPieceInfo();
       }
@@ -231,16 +242,20 @@ function movePiece(){
     if (pieceLastN % 2 === 0){
       if (moveCond(-1)){
         updateBoard();
+        // resetJumpable();
       } else if (jumpCond()){
         jumpPieceEven();
+        // resetJumpable();
       } else {
         resetPieceInfo();
       }
     }else {
       if (moveCond(1)){
         updateBoard();
+        // resetJumpable();
       } else if (jumpCond()){
         jumpPieceOdd();
+        // resetJumpable();
       } else {
         resetPieceInfo();
       }
@@ -254,14 +269,18 @@ function updateBoard(){
     boardArray[pieceFirstN][pieceLastN] = null;
     turn *= -1;
     render();
+    // resetJumpable();
     resetPieceInfo();
+
   } else {
     boardArray[targetFirstN][targetLastN] = turn;
     boardArray[pieceFirstN][pieceLastN] = null;
     turn *= -1;
     kingMe();
     render();
+    // resetJumpable();
     resetPieceInfo();
+    // resetJumpable();
   }
 }
 
@@ -418,7 +437,12 @@ function checkJump(){
       if (elem === turn){
         if (i === 0){
           if (array[idx+turn] === turn*-1 && (idx % 2 === 0)){
-            console.log('test check jump i = 0', idx, 'idx', i, 'i', elem, 'elem')  // i think it works. this checks if the piece at array 0 is even so that it can jump to the right. for both directions and doesnt read anything to its left.
+            console.log('test check jump i = 0', idx, 'idx', i, 'i', elem, 'elem')  
+            // i think it works. this checks if the piece at array 0 is even so that it can jump to the right. for both directions and doesnt read anything to its left.
+            if (boardArray[i+1][idx+turn*2] === null){
+              console.log('you can jump', i+1, 'i + 1', idx+turn*2, 'idx + turn*2')
+              document.getElementById(`${i+1}${idx+turn*2}`).classList.toggle('jumpable')
+            }
           }
         } else if (i === 3){
 
