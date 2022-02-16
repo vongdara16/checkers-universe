@@ -70,7 +70,18 @@ div.one-piece {
   border-radius: 50%;
   border: 2px solid blue;
   background-color: orange;
-  box-shadow: 10px;
+  /* box-shadow: 10px; */
+  height: 90%;
+  width: 90%;
+  justify-self: center;
+  align-self: center;
+  text-align: center;
+}
+div.one-king {
+  border-radius: 50%;
+  border: 2px solid red;
+  background-color: wheat;
+  /* box-shadow: 10px; */
   height: 90%;
   width: 90%;
   justify-self: center;
@@ -82,7 +93,18 @@ div.two-piece {
   border-radius: 50%;
   border: 2px solid magenta;
   background-color: lightgreen;
-  box-shadow: 10px;
+  /* box-shadow: 10px; */
+  height: 90%;
+  width: 90%;
+  justify-self: center;
+  align-self: center;
+  text-align: center;
+}
+div.two-king {
+  border-radius: 50%;
+  border: 2px solid green;
+  background-color:yellow;
+  /* box-shadow: 10px; */
   height: 90%;
   width: 90%;
   justify-self: center;

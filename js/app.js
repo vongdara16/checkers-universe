@@ -30,6 +30,9 @@ const playScreen = document.querySelector('#play-screen')
 const displayName1 = document.querySelector('#display-name-1')
 const displayName2 = document.querySelector('#display-name-2')
 
+// const oneP = document.querySelectorAll('.one-piece')
+
+
 
 /*----------------------------- Event Listeners -----------------------------*/
 playBtn.addEventListener('click', () => {
@@ -63,10 +66,11 @@ function firstScreenLoadUp(){
 function screenSwap(){
   startScreen.classList.toggle('animate__fadeInDown')
   startScreen.classList.toggle('animate__fadeOutUp')
-  playScreen.classList.toggle('animate__fadeInUp')
+  playScreen.classList.toggle('animate__fadeInUp')  // set timers for changing screens 
   playScreen.classList.toggle('animate__fadeOutDown')
-  // body.classList.toggle('animate__fadeInDown')
+  // body.classList.toggle('animate__fadeInDown') 
   // body.classList.toggle('animate__fadeOutUp')
+  // set timers for allowing the body to change first. then the board will appear after. 
   setTimeout(function(){
     playScreen.toggleAttribute('hidden')
     startScreen.toggleAttribute('hidden')
@@ -81,12 +85,12 @@ function init(){
   turn = 1
   winner = null
   boardArray = [
-    [null, null, 1, null, null, -1, -1, -1],  // array 0
-    [null, null, null, null, null, -1, -1, -1],  // array 1
-    [null, null, null, null, null, -1, -1, -1],  // array 2
-    [null, null, null, null, null, -1, -1, -1]   // array 3
+    [1, 1, 1, null, null, -1, -1, -1],  // array 0
+    [1, 1, 1, null, null, -1, -1, -1],  // array 1
+    [1, 1, 1, null, null, -1, -1, -1],  // array 2
+    [1, 1, 1, null, null, -1, -1, -1]   // array 3
   ]
-  p1Pieces = 1
+  p1Pieces = 12
   p2Pieces = -12
   console.log('test init')
   render();
@@ -145,16 +149,22 @@ function render(){
     displayName2.style.color = 'red'
   }
 
-  // winState();
+  kingMe();
   getWinner();
 }
 
-function boardState(){
+function kingMe(){
   boardArray.forEach((array, i) => {
     array.forEach((elem, idx) => {
-      if (elem > 0){
-
+      if (elem === 1 && idx === 7){
+        document.getElementById(`${i}${idx}`).innerHTML = `<div class="one-king" id="${i}${idx}">${i}K${idx}</div>`
+        console.log('king me')
       }
+      if (elem === -1 && idx === 0){
+        document.getElementById(`${i}${idx}`).innerHTML = `<div class="two-king" id="${i}${idx}">${i}K${idx}</div>`
+        console.log('king me')
+      }
+
     })
   })
 }
@@ -298,40 +308,4 @@ function getWinner(){
   // ^^ move the style changes later
   // console.log('winner is ', winner)
 }
-
-
-// function winState (){
-//   let p1 = 0 
-//   let p2 = 0
-//   boardArray.forEach((array, idx) => {
-//     array.some((elem, i) => {
-//       if (elem > 0){
-//         p1++
-//       } else if(elem < 0){
-//         p2++
-//       }
-//       if (p1 === 0){
-//         winner = -1
-//       } else if (p2 === 0) {
-//         winner = 1
-//       }
-//     })
-//     array.forEach((elem, i) => {
-//       if (elem === 1 && i === 7){
-//         console.log('king me')
-//       }
-//     })
-//   })
-//   console.log(p1)
-//   console.log(p2)
-// }
-
-// function getWinner (){
-//   if (winner === 1){
-//     console.log('winner 1')
-//   }
-//   if (winner === -1){
-//     console.log('winner 2')
-//   }
-// }
 
