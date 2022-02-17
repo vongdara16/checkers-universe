@@ -89,13 +89,13 @@ function selectTheme(evt){
 }
 
 function init(){
-  turn = -1
+  turn = 1
   winner = null
   boardArray = [
-    [null, -1, null, -1, null, null, 1, -2],  // array 0
-    [null, -1, 2, null, null, null, null, null],  // array 1
-    [null, null, null, null, 1, -2, 1, null],  // array 2
-    [2, -1, null, null, 1, null, 1, null]   // array 3
+    [1, 1, 1, null, null, -1, -1, -1],  // array 0
+    [1, 1, 1, null, null, -1, -1, -1],  // array 1
+    [1, 1, 1, null, null, -1, -1, -1],  // array 2
+    [1, 1, 1, null, null, -1, -1, -1]   // array 3
   ]
   p1Pieces = 12
   p2Pieces = -12
@@ -200,14 +200,12 @@ function getPiece(evt){
   pieceId = evt.target.id
   pieceFirstN = Number(pieceId[0])
   pieceLastN = Number(pieceId[1])
-  // console.log(pieceId, 'pieceID')
 }
 
 function getTarget(evt){
   targetId = evt.target.id
   targetFirstN = Number(targetId[0])
   targetLastN = Number(targetId[1])
-  // console.log(targetId, 'targetID')
 }
 
 function resetHighlight(){
@@ -237,9 +235,9 @@ function movePiece(){
     }else {
       if (moveKingCond(1)){
         updateBoard();
-        console.log('test move 1 space odd king')
+        // console.log('test move 1 space odd king')
       } else if (jumpKingCond()){
-        console.log('if jump king odd passes')
+        // console.log('if jump king odd passes')
         jumpKingOdd();
       } else {
         resetPieceInfo();
@@ -253,6 +251,7 @@ function movePiece(){
         jumpPieceEven();
       } else {
         resetPieceInfo();
+        // turn *= -1;
       }
     }else {
       if (moveCond(1)){
@@ -261,27 +260,40 @@ function movePiece(){
         jumpPieceOdd();
       } else {
         resetPieceInfo();
+        // turn *= -1;
       }
     }
   }
 }
 
 function updateBoard(){
-  if (boardArray[pieceFirstN][pieceLastN] === turn*2){  //(boardArray[pieceFirstN][pieceLastN] === 2 || boardArray[pieceFirstN][pieceLastN] === -2 ){
-    boardArray[targetFirstN][targetLastN] = turn*2;
-    boardArray[pieceFirstN][pieceLastN] = null;
-    // turn *= -1;
-    resetJumpable();
-    render();
-    resetPieceInfo();
-  } else {
+  if (jumpCond()){
+    console.log('test jump cond')
     boardArray[targetFirstN][targetLastN] = turn;
     boardArray[pieceFirstN][pieceLastN] = null;
-    // turn *= -1;
     kingMe();
+    // movePiece();
     resetJumpable();
     render();
-    resetPieceInfo();
+    resetPieceInfo;
+    return
+  } else {
+    if (boardArray[pieceFirstN][pieceLastN] === turn*2){
+      boardArray[targetFirstN][targetLastN] = turn*2;
+      boardArray[pieceFirstN][pieceLastN] = null;
+      turn *= -1;
+      resetJumpable();
+      render();
+      // resetPieceInfo();
+    } else {
+      boardArray[targetFirstN][targetLastN] = turn;
+      boardArray[pieceFirstN][pieceLastN] = null;
+      turn *= -1;
+      kingMe();
+      resetJumpable();
+      render();
+      resetPieceInfo();
+    }
   }
 }
 
