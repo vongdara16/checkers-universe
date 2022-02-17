@@ -56,7 +56,7 @@ body.earth {
   font-family: 'Exo 2', sans-serif;
   font-size: 6.4rem;
   animation: fadeInDown, color-change infinite;
-  animation-duration: 3s, 40s;
+  animation-duration: 2s, 40s;
   /* animation-delay: 2s; */
   text-align: center;
   /* height: 50vmin; */
@@ -82,7 +82,7 @@ body.earth {
   display: grid;
   grid-template-columns: auto auto;
   grid-template-rows: auto auto;
-  column-gap: 10vmin;
+  column-gap: 50px;
   margin: 25px;
 }
 
@@ -99,17 +99,27 @@ input {
 #dropdownMenuButton2 {
   /* background-color: red;  can change color */
   font-size: 1.8rem;
-  width: 20vmin;
-  margin: 0 0 20px 0;
+  width: 150px;
+  margin: 0 0 25px 0;
 }
 
 .dropdown-menu {
   /* background-color: red; */
   font-size: 1.4rem;
-  width: 20vmin;
+  width: 150px;
 }
 
+#play-btn {
+  /* background-color: red; */
+  font-size: 2.0rem;
+  width: 100px;
+}
 
+/* #play-btn:hover {
+  background-color: darkgreen;
+  font-size: 2.0rem;
+  width: 12vmin;
+} */
 
 @keyframes color-change {
   0% {
@@ -148,6 +158,7 @@ input {
 }
 
 div#play-screen {
+  animation-duration: 2s;
   /* display: flex;
   flex-direction: column;
   justify-content: center;

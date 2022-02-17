@@ -54,20 +54,21 @@ sqInplay.forEach((elem) => {
 // init()
 firstScreenLoadUp()
 function firstScreenLoadUp(){
-  // gameTitle.classList.add('animate__fadeInDown') DELETE
   startScreen.classList.add('animate__fadeInDown')
-  // playScreen.classList.add('animate__fadeOutDown') MAYBE DEL
   playScreen.setAttribute('hidden', true)
-
-  // body.classList.add('animate__fadeInDown')
+  // gameTitle.classList.add('animate__fadeInDown') DELETE
   
+  // playScreen.classList.add('animate__fadeOutDown') MAYBE DEL
+  
+  // body.classList.add('animate__fadeInDown')
 }
 
 function screenSwap(){
-  // startScreen.classList.toggle('animate__fadeInDown')
-  // startScreen.classList.toggle('animate__fadeOutUp')
+  startScreen.classList.toggle('animate__fadeInDown')
+  startScreen.classList.toggle('animate__fadeOutUp')
+  playScreen.classList.toggle('animate__fadeInUp')
   // playScreen.classList.toggle('animate__fadeOutDown')
-  // playScreen.classList.toggle('animate__fadeInUp')  // set timers for changing screens 
+  // set timers for changing screens 
   // body.classList.toggle('animate__fadeInDown') 
   // body.classList.toggle('animate__fadeOutUp')
   // set timers for allowing the body to change first. then the board will appear after. 
