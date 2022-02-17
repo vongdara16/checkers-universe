@@ -13,6 +13,8 @@ let p1Pieces, p2Pieces
 
 let pieceClass
 
+let name1, name2
+
 /*------------------------ Cached Element References ------------------------*/
 const gameTitle = document.querySelector('#game-title')
 const body = document.querySelector('body')
@@ -73,7 +75,7 @@ function screenSwap(){
     playScreen.toggleAttribute('hidden')
   }, 1000)
 
-  
+
   playScreen.classList.toggle('animate__fadeOutDown')
   playScreen.classList.toggle('animate__fadeInUp')
 
@@ -132,13 +134,17 @@ function resetPieceInfo(){
 function render(){
   if (playerName1.value === ''){
     displayName1.innerHTML = 'Player 1'
+    name1 = 'Player 1'
   } else{
     displayName1.innerHTML = playerName1.value
+    name1 = playerName1.value
   }
   if (playerName2.value === ''){
     displayName2.innerHTML = 'Player 2'
+    name2 = 'Player 2'
   } else{
     displayName2.innerHTML = playerName2.value
+    name2 = playerName2.value
   }
 
   sqInplay.forEach((elem) => {
@@ -163,11 +169,15 @@ function render(){
   })
 
   if (turn === 1){  
+    displayName1.innerHTML = `${name1} - It's Your Turn!`
     displayName1.style.color = 'red'
+    displayName2.innerHTML = name2
     displayName2.style.color = ''
   } else {
+    displayName1.innerHTML = name1
     displayName1.style.color = ''
-    displayName2.style.color = 'red'
+    displayName2.style.color = 'blue'
+    displayName2.innerHTML = `${name2} - It's Your Turn!`
   }
 
   highlightJump();
