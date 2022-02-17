@@ -18,7 +18,7 @@ Checkers Universe is an adaptive checkers game
 
 • play checkers! 
 
-
+[Play](https://vongdara16.github.io/checkers-universe/)
 
 
 ***

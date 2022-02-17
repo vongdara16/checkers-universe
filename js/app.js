@@ -267,33 +267,21 @@ function movePiece(){
 }
 
 function updateBoard(){
-  if (jumpCond()){
-    console.log('test jump cond')
-    boardArray[targetFirstN][targetLastN] = turn;
+  if (boardArray[pieceFirstN][pieceLastN] === turn*2){
+    boardArray[targetFirstN][targetLastN] = turn*2;
     boardArray[pieceFirstN][pieceLastN] = null;
-    kingMe();
-    // movePiece();
+    turn *= -1;
     resetJumpable();
     render();
-    resetPieceInfo;
-    return
+    resetPieceInfo();
   } else {
-    if (boardArray[pieceFirstN][pieceLastN] === turn*2){
-      boardArray[targetFirstN][targetLastN] = turn*2;
-      boardArray[pieceFirstN][pieceLastN] = null;
-      turn *= -1;
-      resetJumpable();
-      render();
-      // resetPieceInfo();
-    } else {
-      boardArray[targetFirstN][targetLastN] = turn;
-      boardArray[pieceFirstN][pieceLastN] = null;
-      turn *= -1;
-      kingMe();
-      resetJumpable();
-      render();
-      resetPieceInfo();
-    }
+    boardArray[targetFirstN][targetLastN] = turn;
+    boardArray[pieceFirstN][pieceLastN] = null;
+    turn *= -1;
+    kingMe();
+    resetJumpable();
+    render();
+    resetPieceInfo();
   }
 }
 
