@@ -79,6 +79,7 @@ function screenSwap(){
   playScreen.classList.toggle('animate__fadeOutDown')
   playScreen.classList.toggle('animate__fadeInUp')
 
+  // gameTitle.style.padding
   // setTimeout(function(){
   //   playScreen.toggleAttribute('hidden')
   //   startScreen.toggleAttribute('hidden')
@@ -152,16 +153,16 @@ function render(){
     let firstN = Number(num[0])
     let lastN = Number(num[1])
     if (boardArray[firstN][lastN] === 1){
-      elem.innerHTML = `<div class="one-piece" id="${firstN}${lastN}">${firstN}${lastN}</div>`
+      elem.innerHTML = `<div class="one-piece ${chosenTheme}" id="${firstN}${lastN}"></div>`
     }
     if (boardArray[firstN][lastN] === -1){
-      elem.innerHTML = `<div class="two-piece" id="${firstN}${lastN}">${firstN}${lastN}</div>`
+      elem.innerHTML = `<div class="two-piece ${chosenTheme}" id="${firstN}${lastN}"></div>`
     }
     if (boardArray[firstN][lastN] === 2){
-      elem.innerHTML = `<div class="one-king" id="${firstN}${lastN}">${firstN}${lastN}</div>`
+      elem.innerHTML = `<div class="one-king ${chosenTheme}" id="${firstN}${lastN}"></div>`
     }
     if (boardArray[firstN][lastN] === -2){
-      elem.innerHTML = `<div class="two-king" id="${firstN}${lastN}">${firstN}${lastN}</div>`
+      elem.innerHTML = `<div class="two-king ${chosenTheme}" id="${firstN}${lastN}"></div>`
     }
     if (boardArray[firstN][lastN] === null){
       elem.innerHTML = ``
@@ -200,13 +201,13 @@ function getWinner(){
 
 function playerMove(evt){
   if (turn === 1){
-    if (evt.target.className === 'one-piece' || evt.target.className === 'one-king'){
+    if (evt.target.classList.contains('one-piece') || evt.target.classList.contains('one-king') ){
       getPiece(evt);
       resetHighlight();
       evt.target.parentElement.classList.add('highlight1')
     }
   } else {
-    if (evt.target.className === 'two-piece' || evt.target.className === 'two-king'){
+    if (evt.target.classList.contains('two-piece') || evt.target.classList.contains('two-king')){
       getPiece(evt);
       resetHighlight();
       evt.target.parentElement.classList.add('highlight-1')

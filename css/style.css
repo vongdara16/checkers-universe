@@ -15,7 +15,6 @@ html {
    in most browser configurations this will be 10px */
 :root {
   font-size: 62.5%;
-  /* --animate-duration: 1s; */
 }
 
 body {
@@ -36,20 +35,6 @@ body {
     Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   margin: 0;
   min-height: 100vh;
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; */
-  /* row-gap: 50px; */
-  /* animation: fadeInDown; */
-}
-
-div.space {
-  background-image: url(../assets/space.jpeg);
-}
-
-body.earth {
-  background-image: url(../assets/earth.jpeg);
 }
 
 #game-title {
@@ -60,7 +45,7 @@ body.earth {
   /* animation-delay: 2s; */
   text-align: center;
   /* height: 50vmin; */
-  padding: 100px 0;
+  padding: 6vmin 0 0 0;
   margin: 0 auto;
 }
 
@@ -71,6 +56,7 @@ body.earth {
   justify-content: center;
   align-items: center;
   animation-duration: 2s;
+  margin: 7vmin 0 0 0;
   /* height: 50vmin; */
 }
 
@@ -164,37 +150,38 @@ div#play-screen {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 0 auto;
 }
 
 #btns {
   /* background-color: red; */
-  margin: 0 0 15px 0;
+  margin: 15px 0 15px 0;
   display: flex;
   gap: 25px;
 }
 
 #start-menu-btn {
   background-color: darkblue;
-  border: 2px solid white;
+  border: 3px solid white;
   font-family: 'Poppins', sans-serif;
-  font-size: 1.4rem;
-  width: 105px;
+  font-size: 1.5rem;
+  width: 125px;
   
 }
 
 #reset-btn {
   background-color: darkred;
-  border: 2px solid white;
+  border: 3px solid white;
   font-family: 'Poppins', sans-serif;
-  font-size: 1.4rem;
-  width: 105px;
+  font-size: 1.5rem;
+  width: 125px;
 }
 
 h4 {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.4);
   width: 215px;
   height: 30px;
   margin: 10px;
@@ -209,39 +196,43 @@ section#game-board {
   grid-template-rows: repeat(8, 7vmin);
   grid-template-columns: repeat(8, 7vmin);
   grid-gap: 0vmin;
-  /* position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); */
-  border: 5px solid white;
+  border: 15px solid white;
+  border-radius: 10px;
 }
 
 div.square {
   border: 1px solid black;
-  font-size: 2vmin;
-  background-color:rgb(194, 194, 194);
+  /* font-size: 2vmin; */
+  background-color: rgba(100, 100, 100, 0.6);
   display: grid;
 }
 
 div#white {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 div.one-piece {
   border-radius: 50%;
-  border: 2px solid blue;
-  background-color: orange;
+  border: 3px solid black;
+  background-color: rgba(50, 50, 50, 1);
   height: 90%;
   width: 90%;
   justify-self: center;
   align-self: center;
   text-align: center;
+  /* box-shadow: 0 0 15px 2px rgba(255, 255, 255, 1); */
 }
-div.one-king {
+
+div.one-piece.space {
+  background: 
+    url("../assets/sun.png")
+    center / 110%;
+}
+
+div.two-piece {
   border-radius: 50%;
-  border: 2px solid red;
-  background-color: wheat;
-  /* box-shadow: 10px; */
+  border: 3px solid black;
+  background-color: darkred;
   height: 90%;
   width: 90%;
   justify-self: center;
@@ -249,26 +240,58 @@ div.one-king {
   text-align: center;
 }
 
-div.two-piece {
+div.two-piece.space {
+  background: 
+  url("../assets/moon.png")
+  center / 100%;
+}
+
+div.one-king {
   border-radius: 50%;
-  border: 2px solid magenta;
-  background-color: lightgreen;
+  border: 3px solid black;
+  background-color: lightgray;
+  background-image: url("../assets/crown.png");
+  background-position: center;
+  background-size: 90%;
+  background-repeat: no-repeat;
   height: 90%;
   width: 90%;
   justify-self: center;
   align-self: center;
   text-align: center;
 }
+
+div.one-king.space {
+  background-image: url("../assets/crown.png"), url("../assets/sun.png") ;
+  background-position: center, center;
+  background-size: 90%, 110%;
+  background-repeat: no-repeat, no-repeat;
+}
+
 div.two-king {
   border-radius: 50%;
-  border: 2px solid green;
-  background-color:yellow;
+  border: 3px solid black;
+  background-color: #BD6B73;
+  background-image: url("../assets/crown.png");
+  background-position: center;
+  background-size: 90%;
+  background-repeat: no-repeat;
   height: 90%;
   width: 90%;
   justify-self: center;
   align-self: center;
   text-align: center;
 }
+
+div.two-king.space {
+  background-image: url("../assets/crown.png"), url("../assets/moon.png") ;
+  background-position: center, center;
+  background-size: 90%, 110%;
+  background-repeat: no-repeat, no-repeat;
+}
+
+
+
 
 div.highlight1 {
   border: 4px solid red;
