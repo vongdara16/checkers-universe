@@ -159,10 +159,10 @@ input {
 
 div#play-screen {
   animation-duration: 2s;
-  /* display: flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center; */
+  align-items: center;
   /* min-height: 100vh; */
 }
 

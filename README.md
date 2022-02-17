@@ -8,6 +8,9 @@
 
 Checkers Universe is an adaptive take on the classic game of Checkers! Before starting the game, the user can enter their desired Player Names. After, the user can select a theme of their liking from a drop down list. Then press Play to begin! The game will start with Player 1 going first and turns will alternate after every move. First player to remove all of the opposing pieces off the board wins!
 
+
+Possibly add history of checkers
+
 ***
 
 ### Getting Started 🏃‍♂️

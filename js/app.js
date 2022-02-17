@@ -58,7 +58,7 @@ function firstScreenLoadUp(){
   playScreen.setAttribute('hidden', true)
   // gameTitle.classList.add('animate__fadeInDown') DELETE
   
-  // playScreen.classList.add('animate__fadeOutDown') MAYBE DEL
+  playScreen.classList.add('animate__fadeOutDown') //MAYBE DEL
   
   // body.classList.add('animate__fadeInDown')
 }
@@ -66,16 +66,29 @@ function firstScreenLoadUp(){
 function screenSwap(){
   startScreen.classList.toggle('animate__fadeInDown')
   startScreen.classList.toggle('animate__fadeOutUp')
+
+  startScreen.toggleAttribute('hidden')
+  
+  setTimeout(() => {
+    playScreen.toggleAttribute('hidden')
+  }, 1000)
+
+  
+  playScreen.classList.toggle('animate__fadeOutDown')
   playScreen.classList.toggle('animate__fadeInUp')
-  // playScreen.classList.toggle('animate__fadeOutDown')
+
+  // setTimeout(function(){
+  //   playScreen.toggleAttribute('hidden')
+  //   startScreen.toggleAttribute('hidden')
+  // }, 300)
+  
+
+
+
   // set timers for changing screens 
   // body.classList.toggle('animate__fadeInDown') 
   // body.classList.toggle('animate__fadeOutUp')
   // set timers for allowing the body to change first. then the board will appear after. 
-  setTimeout(function(){
-    playScreen.toggleAttribute('hidden')
-    startScreen.toggleAttribute('hidden')
-  }, 1000)
 
   // setTimeout(function(){
   //   playScreen.classList.toggle(`${chosenTheme}`)
