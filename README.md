@@ -1,87 +1,63 @@
-# CHECKERS UNIVERSE!
+# CHECKERS UNIVERSE
+<!-- ### By: Justin Vongdara -->
 
-## November 10, 2020
-
-### By: Justin Vongdara
-
-[GitHub](https://github.com/vongdara16)
-
+<!-- [GitHub](https://github.com/vongdara16) -->
 *** 
 
-### Overview
+### Overview 
 
-Checkers Universe is an adaptive checkers game 
-
-• input your players names
-
-• Choose a specific theme
-
-• play checkers! 
-
-[Play](https://vongdara16.github.io/checkers-universe/)
-
+Checkers Universe is an adaptive take on the classic game of Checkers! Before starting the game, the user can enter their desired Player Names. After, the user can select a theme of their liking from a drop down list. Then press Play to begin! The game will start with Player 1 going first and turns will alternate after every move. First player to remove all of the opposing pieces off the board wins!
 
 ***
 
-### Technologies Used
+### Getting Started 🏃‍♂️
 
-• HTML/CSS/JavaScript
+- Input Player Names
+- Select A Theme
+- Press Play!
+- Have Fun! 🎉
 
+## [Play Here!](https://vongdara16.github.io/checkers-universe/)
 ***
 
-### Wireframes
 
-Mockup
+### Technologies Used 🖥
+
+- HTML
+- CSS
+- JavaScript
+- Bootstrap
+- Animate.css
+***
+
+### Screenshots
+
+Wireframe
 ![Home](https://i.imgur.com/CzgTlmz.png)
 
-
+Will add more screeenshots of game here
 ***
 
-### Getting Started
+### Stretch Goals ✅
 
-Please click on the link below to play. 
-Then, input both players names and select a theme from the drop down list. 
+- Add double jump
 
-After click play and enjoy!
+- Refactor code to better utilize jumping functions
 
+- Add light/dark mode to main screen
 
-***
+- Add sound effects
 
-### User Stories
+- Add interactive background during the game
 
-delete this section 
-
-***
-### Full Entity Relationship Diagram
+- Add more themes
 
 
 ***
 
-### Component Hierarchy Diagram
+### Credits 
 
-
-
-
-***
-
-### Code Snippet
-
-
-***
-
-
-### Stretch Goals
-
-• Add sound effects
-
-• Add interactive background during the game
-
-• Add more themes
-
-
-***
-
-### Credits
-
+Credits to [Animate.css](https://animate.style/) and [Bootstrap](https://getbootstrap.com/docs/5.1/getting-started/introduction/)  
+All background images were found on Google.
 
 
