@@ -418,22 +418,30 @@ function checkJump(){
         if (i === 0){
           if (idx % 2 === 0){
             hLightEvenJumpR(array, i, idx);
+            kingEvenJumpBackR(array, i, elem, idx);
           } else {
             hLightOddJumpR(i, idx);
+            kingOddJumpBackR(i, elem, idx);
           }
         } else if (i === 3){
           if (idx % 2 === 0){
-            hLightEvenJumpL(i, idx)
+            hLightEvenJumpL(i, idx);
+            kingEvenJumpBackL(i, elem, idx);
           } else {
             hLightOddJumpL(array, i, idx);
+            kingOddJumpBackL(array, i, elem, idx);
           }
         } else {
           if (idx % 2 === 0){
             hLightEvenJumpL(i, idx);
             hLightEvenJumpR(array, i, idx);
+            kingEvenJumpBackL(i, elem, idx);
+            kingEvenJumpBackR(array, i, elem, idx);
           } else {
             hLightOddJumpL(array, i, idx);
             hLightOddJumpR(i, idx);
+            kingOddJumpBackL(array, i, elem, idx);
+            kingOddJumpBackR(i, elem, idx);
           }
         }
       }
@@ -445,6 +453,7 @@ function hLightEvenJumpR(array, i, idx){
   if (array[idx+turn] === turn*-1 || array[idx+turn] === turn*-2){
     if (boardArray[i+1][idx+turn*2] === null){
       document.getElementById(`${i+1}${idx+turn*2}`).classList.add('jumpable')
+      // if even and space empty highlight jump right
     }
   }
 }
@@ -453,6 +462,7 @@ function hLightEvenJumpL(i, idx){
   if (boardArray[i-1][idx+turn] === turn*-1  || boardArray[i-1][idx+turn] === turn*-2){
     if (boardArray[i-1][idx+turn*2] === null){
       document.getElementById(`${i-1}${idx+turn*2}`).classList.add('jumpable')
+      // if even and space empty highlight jump left
     }
   }
 }
@@ -461,6 +471,7 @@ function hLightOddJumpR(i, idx){
   if (boardArray[i+1][idx+turn] === turn*-1 || boardArray[i+1][idx+turn] === turn*-2){
     if (boardArray[i+1][idx+turn*2] === null){
       document.getElementById(`${i+1}${idx+turn*2}`).classList.add('jumpable')
+      // if odd and space empty highlight jump right
     }
   }
 }
@@ -469,21 +480,51 @@ function hLightOddJumpL(array, i, idx){
   if (array[idx+turn] === turn*-1  || array[idx+turn] === turn*-2){
     if (boardArray[i-1][idx+turn*2] === null){
       document.getElementById(`${i-1}${idx+turn*2}`).classList.add('jumpable')
+      // if odd and space empty highlight jump left
     }
   }
 }
 
+function kingEvenJumpBackR(array, i, elem, idx){
+  if (elem === turn*2){
+    if (array[idx-turn] === turn*-1 || array[idx-turn] === turn*-2){
+      if (boardArray[i+1][idx-turn*2] === null){
+        document.getElementById(`${i+1}${idx-turn*2}`).classList.add('jumpable')
+        // if king even jump back right highlight
+      }
+    }
+  }
+}
 
+function kingEvenJumpBackL(i, elem, idx){
+  if (elem === turn*2){
+    if (boardArray[i-1][idx-turn] === turn*-1 || boardArray[i-1][idx-turn] === turn*-2){
+      if (boardArray[i-1][idx-turn*2] === null){
+        document.getElementById(`${i-1}${idx-turn*2}`).classList.add('jumpable')
+        // if king even jump back left highlight
+      }
+    }
+  }
+}
 
-// i think it works. this checks if the piece at array 0 is even so that it can jump to the right. for both directions and doesnt read anything to its left.
-// console.log(document.getElementById(`${i+1}${idx+turn*2}`).classList)
-// console.log('you can jump even', i+1, 'i + 1', idx+turn*2, 'idx + turn*2')
-// console.log('test even check jump i = 0', idx, 'idx', i, 'i', elem, 'elem')  
+function kingOddJumpBackR(i, elem, idx){
+  if (elem === turn*2){
+    if (boardArray[i+1][idx-turn] === turn*-1 || boardArray[i+1][idx-turn] === turn*-2){
+      if (boardArray[i+1][idx-turn*2] === null){
+        document.getElementById(`${i+1}${idx-turn*2}`).classList.add('jumpable')
+        // if king odd jump back right highlight
+      }
+    }
+  }
+}
 
-
-// boardArray = [
-//   [1, 1, 1, null, null, -1, -1, -1],  // array 0
-//   [1, 1, 1, null, null, -1, -1, -1],  // array 1
-//   [1, 1, 1, null, null, -1, -1, -1],  // array 2
-//   [1, 1, 1, null, null, -1, -1, -1]   // array 3
-// ]
+function kingOddJumpBackL(array, i, elem, idx){
+  if (elem === turn*2){
+    if (array[idx-turn] === turn*-1 || array[idx-turn] === turn*-2){
+      if (boardArray[i-1][idx-turn*2] === null){
+        document.getElementById(`${i-1}${idx-turn*2}`).classList.add('jumpable')
+        // if king odd jump back left highlight
+      }
+    }
+  }
+}
