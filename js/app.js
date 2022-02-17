@@ -92,10 +92,10 @@ function init(){
   turn = 1
   winner = null
   boardArray = [
-    [1, 1, 1, null, null, -1, -1, -1],  // array 0
-    [1, 1, 1, null, null, -1, -1, -1],  // array 1
-    [1, 1, 1, null, null, -1, -1, -1],  // array 2
-    [1, 1, 1, null, null, -1, -1, -1]   // array 3
+    [-2, 1, null, 1, -1, null, -1, 2],  // array 0
+    [-2, 1, null, null, null, null, -1, 2],  // array 1
+    [-2, 1, null, 1, -1, null, -1, 2],  // array 2
+    [-2, 1, null, null, null, null, -1, 2]   // array 3
   ]
   p1Pieces = 12
   p2Pieces = -12
@@ -162,39 +162,32 @@ function render(){
 function playerMove(evt){
   if (turn === 1){
     if (evt.target.className === 'one-piece' || evt.target.className === 'one-king'){
-      getPieceId(evt);
+      getPiece(evt);
       resetHighlight();
       evt.target.parentElement.classList.add('highlight1')
     }
-    
-    if (evt.target.classList.contains('inplay') && pieceId !== null){
-      getTargetId(evt);
-      resetHighlight();
-      movePiece();
-    }
   } else {
     if (evt.target.className === 'two-piece' || evt.target.className === 'two-king'){
-      getPieceId(evt);
+      getPiece(evt);
       resetHighlight();
       evt.target.parentElement.classList.add('highlight-1')
     }
-    
-    if (evt.target.classList.contains('inplay') && pieceId !== null){
-      getTargetId(evt);
-      resetHighlight();
-      movePiece();
-    }
+  }
+  if (evt.target.classList.contains('inplay') && pieceId !== null){
+    getTarget(evt);
+    resetHighlight();
+    movePiece();
   }
 }
 
-function getPieceId(evt){
+function getPiece(evt){
   pieceClass = evt.target.className
   pieceId = evt.target.id
   pieceFirstN = Number(pieceId[0])
   pieceLastN = Number(pieceId[1])
 }
 
-function getTargetId(evt){
+function getTarget(evt){
   targetId = evt.target.id
   targetFirstN = Number(targetId[0])
   targetLastN = Number(targetId[1])
@@ -220,8 +213,8 @@ function movePiece(){
       if (moveKingCond(-1)){
         updateBoard();
       } else if (jumpKingCond()){
-        jumpPieceEven();
         jumpKingEven();
+        jumpPieceEven();
       } else {
         resetPieceInfo();
       }
@@ -229,8 +222,8 @@ function movePiece(){
       if (moveKingCond(1)){
         updateBoard();
       } else if (jumpKingCond()){
-        jumpPieceOdd();
         jumpKingOdd();
+        jumpPieceOdd();
       } else {
         resetPieceInfo();
       }
@@ -257,14 +250,13 @@ function movePiece(){
 }
 
 function updateBoard(){
-  if (boardArray[pieceFirstN][pieceLastN] === 2 || boardArray[pieceFirstN][pieceLastN] === -2 ){
+  if (boardArray[pieceFirstN][pieceLastN] === turn*2){  //(boardArray[pieceFirstN][pieceLastN] === 2 || boardArray[pieceFirstN][pieceLastN] === -2 ){
     boardArray[targetFirstN][targetLastN] = turn*2;
     boardArray[pieceFirstN][pieceLastN] = null;
     turn *= -1;
     resetJumpable();
     render();
     resetPieceInfo();
-
   } else {
     boardArray[targetFirstN][targetLastN] = turn;
     boardArray[pieceFirstN][pieceLastN] = null;
@@ -301,10 +293,8 @@ function moveCond(num) {
 
 function moveKingCond(num){
   if ((targetLastN === (pieceLastN+turn) || targetLastN === (pieceLastN-turn)) &&(targetFirstN === pieceFirstN || targetFirstN === (pieceFirstN+num)) && (boardArray[targetFirstN][targetLastN] === null)){
-    console.log('king is true')
     return true
   } else {
-    console.log('king is false')
     return false
   }
 }
@@ -318,10 +308,8 @@ function jumpCond(){
 }
 function jumpKingCond(){
   if ((boardArray[targetFirstN][targetLastN] === null) && (targetLastN === pieceLastN+(turn*2) || targetLastN === pieceLastN-(turn*2)) && (targetFirstN === pieceFirstN+1 || targetFirstN === pieceFirstN-1)){
-    console.log('jking is true')
     return true
   } else {
-    console.log('jking is false')
     return false
   }
 }
