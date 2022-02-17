@@ -28,6 +28,8 @@ Checkers Universe is an adaptive take on the classic game of Checkers! Before st
 - JavaScript
 - Bootstrap
 - Animate.css
+- git
+
 ***
 
 ### Screenshots

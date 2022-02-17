@@ -15,16 +15,24 @@ html {
    in most browser configurations this will be 10px */
 :root {
   font-size: 62.5%;
-  --animate-duration: 1s;
+  /* --animate-duration: 1s; */
 }
 
 body {
-  background-color: #E7ECEF;
+  background-color: #A2AEBB;
+  /* #E7ECEF; */
+  /* #A2AEBB */
+  /* #313E50 */
   /* Use a system font, if none are available use an available sans-sarif font */
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   margin: 0;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* animation: fadeInDown; */
 }
 
 div.space {
@@ -36,26 +44,65 @@ body.earth {
 }
 
 #game-title {
-  animation-delay: 0.3s;
-  animation-duration: 0.8s;
+  animation: fadeInDown, colorchange infinite;
+  animation-duration: 2s, 50s;
   text-align: center;
 }
 
+@keyframes colorchange {
+  0% {
+    color: blue;
+  }
+  10% {
+    color: #8e44ad;
+  }
+  20% {
+    color: #1abc9c;
+  }
+  30% {
+    color: #d35400;
+  }
+  40% {
+    color: blue;
+  }
+  50% {
+    color: #34495e;
+  }
+  60% {
+    color: blue;
+  }
+  70% {
+    color: #2980b9;
+  }
+  80% {
+    color: #f1c40f;
+  }
+  90% {
+    color: #2980b9;
+  }
+  100% {
+    color: pink;
+  }
+}
+
 #start-screen {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center; */
+  /* min-height: 100vh; */
 
 }
 
 div#play-screen {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
+  /* min-height: 100vh; */
 }
 
 section#game-board {
-  /* visibility: hidden; */
   display: grid;
   grid-template-rows: repeat(8, 7vmin);
   grid-template-columns: repeat(8, 7vmin);
@@ -82,7 +129,6 @@ div.one-piece {
   border-radius: 50%;
   border: 2px solid blue;
   background-color: orange;
-  /* box-shadow: 10px; */
   height: 90%;
   width: 90%;
   justify-self: center;
@@ -105,7 +151,6 @@ div.two-piece {
   border-radius: 50%;
   border: 2px solid magenta;
   background-color: lightgreen;
-  /* box-shadow: 10px; */
   height: 90%;
   width: 90%;
   justify-self: center;
@@ -116,7 +161,6 @@ div.two-king {
   border-radius: 50%;
   border: 2px solid green;
   background-color:yellow;
-  /* box-shadow: 10px; */
   height: 90%;
   width: 90%;
   justify-self: center;
