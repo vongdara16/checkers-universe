@@ -54,9 +54,9 @@ sqInplay.forEach((elem) => {
 // init()
 firstScreenLoadUp()
 function firstScreenLoadUp(){
-  // gameTitle.classList.add('animate__fadeInDown')
+  // gameTitle.classList.add('animate__fadeInDown') DELETE
   startScreen.classList.add('animate__fadeInDown')
-  // playScreen.classList.add('animate__fadeOutDown')
+  // playScreen.classList.add('animate__fadeOutDown') MAYBE DEL
   playScreen.setAttribute('hidden', true)
 
   // body.classList.add('animate__fadeInDown')

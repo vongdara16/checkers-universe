@@ -23,15 +23,24 @@ body {
   /* #E7ECEF; */
   /* #A2AEBB */
   /* #313E50 */
+
+  /* fonts
+  font-family: 'Exo 2', sans-serif;
+  font-family: 'Oswald', sans-serif;
+  font-family: 'Lato', sans-serif;
+  font-family: 'Poppins', sans-serif; */
+
+
   /* Use a system font, if none are available use an available sans-sarif font */
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   margin: 0;
   min-height: 100vh;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
+  /* row-gap: 50px; */
   /* animation: fadeInDown; */
 }
 
@@ -44,14 +53,67 @@ body.earth {
 }
 
 #game-title {
-  animation: fadeInDown, colorchange infinite;
-  animation-duration: 2s, 50s;
+  font-family: 'Exo 2', sans-serif;
+  font-size: 6.4rem;
+  animation: fadeInDown, color-change infinite;
+  animation-duration: 3s, 40s;
+  /* animation-delay: 2s; */
   text-align: center;
+  /* height: 50vmin; */
+  padding: 100px 0;
 }
 
-@keyframes colorchange {
+#start-screen {
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  animation-duration: 2s;
+  /* height: 50vmin; */
+}
+
+#welcome-msg {
+  text-align: center;
+  font-size: 2.4rem;
+}
+
+#inputs {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  column-gap: 10vmin;
+  margin: 25px;
+}
+
+.player-names{
+  font-size: 2.1rem;
+  justify-self: center;
+}
+
+input {
+  font-size: 1.6rem;
+  border: 0;
+}
+
+#dropdownMenuButton2 {
+  /* background-color: red;  can change color */
+  font-size: 1.8rem;
+  width: 20vmin;
+  margin: 0 0 20px 0;
+}
+
+.dropdown-menu {
+  /* background-color: red; */
+  font-size: 1.4rem;
+  width: 20vmin;
+}
+
+
+
+@keyframes color-change {
   0% {
-    color: blue;
+    color: darkblue;
   }
   10% {
     color: #8e44ad;
@@ -63,7 +125,7 @@ body.earth {
     color: #d35400;
   }
   40% {
-    color: blue;
+    color: pink;
   }
   50% {
     color: #34495e;
@@ -81,17 +143,8 @@ body.earth {
     color: #2980b9;
   }
   100% {
-    color: pink;
+    color: darkblue;
   }
-}
-
-#start-screen {
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; */
-  /* min-height: 100vh; */
-
 }
 
 div#play-screen {
