@@ -57,16 +57,17 @@ function firstScreenLoadUp(){
   gameTitle.classList.add('animate__fadeInDown')
   startScreen.classList.add('animate__fadeInDown')
   playScreen.classList.add('animate__fadeOutDown')
-  // body.classList.add('animate__fadeInDown')
   playScreen.setAttribute('hidden', true)
+
+  // body.classList.add('animate__fadeInDown')
   
 }
 
 function screenSwap(){
   startScreen.classList.toggle('animate__fadeInDown')
   startScreen.classList.toggle('animate__fadeOutUp')
-  playScreen.classList.toggle('animate__fadeInUp')  // set timers for changing screens 
   playScreen.classList.toggle('animate__fadeOutDown')
+  playScreen.classList.toggle('animate__fadeInUp')  // set timers for changing screens 
   // body.classList.toggle('animate__fadeInDown') 
   // body.classList.toggle('animate__fadeOutUp')
   // set timers for allowing the body to change first. then the board will appear after. 
@@ -91,15 +92,13 @@ function init(){
   turn = 1
   winner = null
   boardArray = [
-    [1, 1, 2, null, null, -2, -1, -1],  // array 0
-    [1, 1, 2, null, null, -2, -1, -1],  // array 1
-    [1, 1, 2, null, null, -2, -1, -1],  // array 2
-    [1, 1, 2, null, null, -2, -1, -1]   // array 3
+    [1, 1, 1, null, null, -1, -1, -1],  // array 0
+    [1, 1, 1, null, null, -1, -1, -1],  // array 1
+    [1, 1, 1, null, null, -1, -1, -1],  // array 2
+    [1, 1, 1, null, null, -1, -1, -1]   // array 3
   ]
-  // console.log(boardArray)
   p1Pieces = 12
   p2Pieces = -12
-  console.log('test init')
   render();
   resetPieceInfo();
   resetHighlight();
@@ -137,14 +136,14 @@ function render(){
     if (boardArray[firstN][lastN] === -1){
       elem.innerHTML = `<div class="two-piece" id="${firstN}${lastN}">${firstN}${lastN}</div>`
     }
-    if (boardArray[firstN][lastN] === null){
-      elem.innerHTML = ``
-    }
     if (boardArray[firstN][lastN] === 2){
       elem.innerHTML = `<div class="one-king" id="${firstN}${lastN}">${firstN}${lastN}</div>`
     }
     if (boardArray[firstN][lastN] === -2){
       elem.innerHTML = `<div class="two-king" id="${firstN}${lastN}">${firstN}${lastN}</div>`
+    }
+    if (boardArray[firstN][lastN] === null){
+      elem.innerHTML = ``
     }
   })
 
@@ -165,20 +164,19 @@ function playerMove(evt){
     if (evt.target.className === 'one-piece' || evt.target.className === 'one-king'){
       getPieceId(evt);
       resetHighlight();
-      evt.target.parentElement.classList.toggle('highlight')
+      evt.target.parentElement.classList.add('highlight1')
     }
     
     if (evt.target.classList.contains('inplay') && pieceId !== null){
       getTargetId(evt);
       resetHighlight();
       movePiece();
-      // resetJumpable();
     }
   } else {
     if (evt.target.className === 'two-piece' || evt.target.className === 'two-king'){
       getPieceId(evt);
       resetHighlight();
-      evt.target.parentElement.classList.toggle('highlight')
+      evt.target.parentElement.classList.add('highlight-1')
     }
     
     if (evt.target.classList.contains('inplay') && pieceId !== null){
@@ -204,13 +202,15 @@ function getTargetId(evt){
 
 function resetHighlight(){
   sqInplay.forEach((elem) =>{
-    elem.classList.remove('highlight')
+    elem.classList.remove('highlight1')
+    elem.classList.remove('highlight-1')
   })
 }
 
 function resetJumpable(){
   sqInplay.forEach((elem) =>{
-    elem.classList.remove('jumpable')
+    elem.classList.remove(`jumpable1`)
+    elem.classList.remove(`jumpable-1`)
   })
 }
 
@@ -452,7 +452,7 @@ function checkJump(){
 function hLightEvenJumpR(array, i, idx){
   if (array[idx+turn] === turn*-1 || array[idx+turn] === turn*-2){
     if (boardArray[i+1][idx+turn*2] === null){
-      document.getElementById(`${i+1}${idx+turn*2}`).classList.add('jumpable')
+      document.getElementById(`${i+1}${idx+turn*2}`).classList.add(`jumpable${turn}`)
       // if even and space empty highlight jump right
     }
   }
@@ -461,7 +461,7 @@ function hLightEvenJumpR(array, i, idx){
 function hLightEvenJumpL(i, idx){
   if (boardArray[i-1][idx+turn] === turn*-1  || boardArray[i-1][idx+turn] === turn*-2){
     if (boardArray[i-1][idx+turn*2] === null){
-      document.getElementById(`${i-1}${idx+turn*2}`).classList.add('jumpable')
+      document.getElementById(`${i-1}${idx+turn*2}`).classList.add(`jumpable${turn}`)
       // if even and space empty highlight jump left
     }
   }
@@ -470,7 +470,7 @@ function hLightEvenJumpL(i, idx){
 function hLightOddJumpR(i, idx){
   if (boardArray[i+1][idx+turn] === turn*-1 || boardArray[i+1][idx+turn] === turn*-2){
     if (boardArray[i+1][idx+turn*2] === null){
-      document.getElementById(`${i+1}${idx+turn*2}`).classList.add('jumpable')
+      document.getElementById(`${i+1}${idx+turn*2}`).classList.add(`jumpable${turn}`)
       // if odd and space empty highlight jump right
     }
   }
@@ -479,7 +479,7 @@ function hLightOddJumpR(i, idx){
 function hLightOddJumpL(array, i, idx){
   if (array[idx+turn] === turn*-1  || array[idx+turn] === turn*-2){
     if (boardArray[i-1][idx+turn*2] === null){
-      document.getElementById(`${i-1}${idx+turn*2}`).classList.add('jumpable')
+      document.getElementById(`${i-1}${idx+turn*2}`).classList.add(`jumpable${turn}`)
       // if odd and space empty highlight jump left
     }
   }
@@ -489,7 +489,7 @@ function kingEvenJumpBackR(array, i, elem, idx){
   if (elem === turn*2){
     if (array[idx-turn] === turn*-1 || array[idx-turn] === turn*-2){
       if (boardArray[i+1][idx-turn*2] === null){
-        document.getElementById(`${i+1}${idx-turn*2}`).classList.add('jumpable')
+        document.getElementById(`${i+1}${idx-turn*2}`).classList.add(`jumpable${turn}`)
         // if king even jump back right highlight
       }
     }
@@ -500,7 +500,7 @@ function kingEvenJumpBackL(i, elem, idx){
   if (elem === turn*2){
     if (boardArray[i-1][idx-turn] === turn*-1 || boardArray[i-1][idx-turn] === turn*-2){
       if (boardArray[i-1][idx-turn*2] === null){
-        document.getElementById(`${i-1}${idx-turn*2}`).classList.add('jumpable')
+        document.getElementById(`${i-1}${idx-turn*2}`).classList.add(`jumpable${turn}`)
         // if king even jump back left highlight
       }
     }
@@ -511,7 +511,7 @@ function kingOddJumpBackR(i, elem, idx){
   if (elem === turn*2){
     if (boardArray[i+1][idx-turn] === turn*-1 || boardArray[i+1][idx-turn] === turn*-2){
       if (boardArray[i+1][idx-turn*2] === null){
-        document.getElementById(`${i+1}${idx-turn*2}`).classList.add('jumpable')
+        document.getElementById(`${i+1}${idx-turn*2}`).classList.add(`jumpable${turn}`)
         // if king odd jump back right highlight
       }
     }
@@ -522,7 +522,7 @@ function kingOddJumpBackL(array, i, elem, idx){
   if (elem === turn*2){
     if (array[idx-turn] === turn*-1 || array[idx-turn] === turn*-2){
       if (boardArray[i-1][idx-turn*2] === null){
-        document.getElementById(`${i-1}${idx-turn*2}`).classList.add('jumpable')
+        document.getElementById(`${i-1}${idx-turn*2}`).classList.add(`jumpable${turn}`)
         // if king odd jump back left highlight
       }
     }
