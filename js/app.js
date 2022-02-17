@@ -89,13 +89,13 @@ function selectTheme(evt){
 }
 
 function init(){
-  turn = 1
+  turn = -1
   winner = null
   boardArray = [
-    [-2, 1, null, 1, -1, null, -1, 2],  // array 0
-    [-2, 1, null, null, null, null, -1, 2],  // array 1
-    [-2, 1, null, 1, -1, null, -1, 2],  // array 2
-    [-2, 1, null, null, null, null, -1, 2]   // array 3
+    [null, -1, null, -1, null, null, 1, -2],  // array 0
+    [null, -1, 2, null, null, null, null, null],  // array 1
+    [null, null, null, null, 1, -2, 1, null],  // array 2
+    [2, -1, null, null, 1, null, 1, null]   // array 3
   ]
   p1Pieces = 12
   p2Pieces = -12
@@ -106,6 +106,7 @@ function init(){
 }
 
 function resetPieceInfo(){
+  pieceClass = null
   pieceId = null
   pieceFirstN = null
   pieceLastN = null
@@ -155,8 +156,22 @@ function render(){
     displayName2.style.color = 'red'
   }
 
-  checkJump();
+  highlightJump();
   getWinner();
+}
+
+function getWinner(){
+  if (p1Pieces === 0){
+    winner = -1
+    displayName2.style.color = 'gold'
+    displayName1.style.color = ''
+  } else if (p2Pieces === 0){
+    winner = 1
+    displayName1.style.color = 'gold'
+    displayName2.style.color = ''
+  }
+  // ^^ move the style changes later
+  // console.log('winner is ', winner)
 }
 
 function playerMove(evt){
@@ -185,12 +200,14 @@ function getPiece(evt){
   pieceId = evt.target.id
   pieceFirstN = Number(pieceId[0])
   pieceLastN = Number(pieceId[1])
+  // console.log(pieceId, 'pieceID')
 }
 
 function getTarget(evt){
   targetId = evt.target.id
   targetFirstN = Number(targetId[0])
   targetLastN = Number(targetId[1])
+  // console.log(targetId, 'targetID')
 }
 
 function resetHighlight(){
@@ -214,16 +231,16 @@ function movePiece(){
         updateBoard();
       } else if (jumpKingCond()){
         jumpKingEven();
-        jumpPieceEven();
       } else {
         resetPieceInfo();
       }
     }else {
       if (moveKingCond(1)){
         updateBoard();
+        console.log('test move 1 space odd king')
       } else if (jumpKingCond()){
+        console.log('if jump king odd passes')
         jumpKingOdd();
-        jumpPieceOdd();
       } else {
         resetPieceInfo();
       }
@@ -253,14 +270,14 @@ function updateBoard(){
   if (boardArray[pieceFirstN][pieceLastN] === turn*2){  //(boardArray[pieceFirstN][pieceLastN] === 2 || boardArray[pieceFirstN][pieceLastN] === -2 ){
     boardArray[targetFirstN][targetLastN] = turn*2;
     boardArray[pieceFirstN][pieceLastN] = null;
-    turn *= -1;
+    // turn *= -1;
     resetJumpable();
     render();
     resetPieceInfo();
   } else {
     boardArray[targetFirstN][targetLastN] = turn;
     boardArray[pieceFirstN][pieceLastN] = null;
-    turn *= -1;
+    // turn *= -1;
     kingMe();
     resetJumpable();
     render();
@@ -319,12 +336,16 @@ function jumpPieceEven(){
     boardArray[targetFirstN][targetLastN-turn] = null;
     pieceCount();
     updateBoard();
+    console.log('even piece jumping up left')
+    return
     // even last num jumping left
   }
   if (targetFirstN === pieceFirstN+1 && (boardArray[pieceFirstN][pieceLastN+turn] === (turn*-1) || boardArray[pieceFirstN][pieceLastN+turn] === (turn*-2))){
     boardArray[pieceFirstN][pieceLastN+turn] = null;
     pieceCount();
     updateBoard();
+    console.log('even piece jump up right')
+    return
     // even last num jumping right
   }
 }
@@ -334,44 +355,93 @@ function jumpPieceOdd(){
     boardArray[pieceFirstN][pieceLastN+turn] = null;
     pieceCount();
     updateBoard();
+    console.log('odd piece jump up left')
+    return
     // odd last num jumping left
   }
+
   if (targetFirstN === pieceFirstN+1 && (boardArray[targetFirstN][targetLastN-turn] === (turn*-1) || boardArray[targetFirstN][targetLastN-turn] === (turn*-2))){
     boardArray[targetFirstN][targetLastN-turn] = null;
     pieceCount();
     updateBoard();
+    console.log('odd piece jump up right')
+    return
     // odd last num jumping right
   }
 }
 
 function jumpKingEven(){
-  if (targetFirstN === pieceFirstN-1 && (boardArray[targetFirstN][targetLastN+turn] === (turn*-1) || boardArray[targetFirstN][targetLastN+turn] === (turn*-2))){
-    boardArray[targetFirstN][targetLastN+turn] = null;
-    pieceCount();
-    updateBoard();
-    // king even jump down left
-  }
-  if (targetFirstN === pieceFirstN+1 && (boardArray[pieceFirstN][pieceLastN-turn] === (turn*-1) || boardArray[pieceFirstN][pieceLastN-turn] === (turn*-2))){
-    boardArray[pieceFirstN][pieceLastN-turn] = null;
-    pieceCount();
-    updateBoard();
-    // king even jump down right
+  if (targetLastN > pieceLastN){
+    if ((boardArray[pieceFirstN][pieceLastN+1] === turn*-1 || boardArray[pieceFirstN][pieceLastN+1] === turn*-2) && (targetFirstN === pieceFirstN+1)){
+      boardArray[pieceFirstN][pieceLastN+1] = null
+      pieceCount();
+      updateBoard();
+      console.log('jump king even up right')
+      return  // king even jump up right
+    } 
+    
+    if ((boardArray[targetFirstN][targetLastN-1] === turn*-1 || boardArray[targetFirstN][targetLastN-1] === turn*-2) && (targetFirstN === pieceFirstN-1)){
+      boardArray[targetFirstN][targetLastN-1] = null
+      pieceCount();
+      updateBoard();
+      console.log('jump king even up left')
+      return  // king even jump up left
+    }
+  } else{
+    if ((boardArray[pieceFirstN][pieceLastN-1] === turn*-1 || boardArray[pieceFirstN][pieceLastN-1] === turn*-2) && (targetFirstN === pieceFirstN+1)){
+      boardArray[pieceFirstN][pieceLastN-1] = null
+      console.log(pieceId, 'pieceID', targetId, 'targetID')
+      pieceCount();
+      updateBoard();
+      console.log('jump king even down right')
+      return  // king even jump down right
+    } 
+    
+    if ((boardArray[targetFirstN][targetLastN+1] === turn*-1 || boardArray[targetFirstN][targetFirstN+1] === turn*-2) && (targetFirstN === pieceFirstN-1)){
+      boardArray[targetFirstN][targetLastN+1] = null
+      pieceCount();
+      updateBoard();
+      console.log('jump king even down left')
+      return  // king even jump down left
+    }
   }
 }
 
 function jumpKingOdd(){
-  if (targetFirstN === pieceFirstN-1 && (boardArray[pieceFirstN][pieceLastN-turn] === (turn*-1) || boardArray[pieceFirstN][pieceLastN-turn] === (turn*-2))){
-    boardArray[pieceFirstN][pieceLastN-turn] = null;
-    pieceCount();
-    updateBoard();
-    // king odd jump down left
+  if (targetLastN > pieceLastN){
+    if ((boardArray[targetFirstN][targetLastN-1] === turn*-1 || boardArray[targetFirstN][targetLastN-1] === turn*-2) && (targetFirstN === pieceFirstN+1)){
+      boardArray[targetFirstN][targetLastN-1] = null
+      pieceCount();
+      updateBoard();
+      console.log('jump king odd up right')
+      return  // king odd jump up right
+    }
+
+    if ((boardArray[pieceFirstN][pieceLastN+1] === turn*-1 || boardArray[pieceFirstN][pieceLastN+1] === turn*-2) && (targetFirstN === pieceFirstN-1)){
+      boardArray[pieceFirstN][pieceLastN+1] = null
+      pieceCount();
+      updateBoard();
+      console.log('jump king odd up left')
+      return  // king odd jump up left
+    }
+  } else {
+    if ((boardArray[targetFirstN][targetLastN+1] === turn*-1 || boardArray[targetFirstN][targetLastN+1] === turn*-2) && (targetFirstN === pieceFirstN+1)){
+      boardArray[targetFirstN][targetLastN+1] = null
+      pieceCount();
+      updateBoard();
+      console.log('jump king odd down right')
+      return  // king odd jump down right
+    }
+
+    if ((boardArray[pieceFirstN][pieceLastN-1] === turn*-1 || boardArray[pieceFirstN][pieceLastN-1] === turn*-2) && (targetFirstN === pieceFirstN -1)){
+      boardArray[pieceFirstN][pieceLastN-1] = null
+      pieceCount();
+      updateBoard();
+      console.log('jump king odd down left')
+      return  // king odd jump down left
+    }
   }
-  if (targetFirstN === pieceFirstN+1 && (boardArray[targetFirstN][targetLastN+turn] === (turn*-1) || boardArray[pieceFirstN][pieceLastN+turn] === (turn*-2))){
-    boardArray[targetFirstN][targetLastN+turn] = null;
-    pieceCount();
-    updateBoard();
-    // king odd jump down right
-  }
+  
 }
 
 function pieceCount(){
@@ -385,21 +455,7 @@ function pieceCount(){
   // possibly simplify by both values equal positive 12. maybe
 }
 
-function getWinner(){
-  if (p1Pieces === 0){
-    winner = -1
-    displayName2.style.color = 'gold'
-    displayName1.style.color = ''
-  } else if (p2Pieces === 0){
-    winner = 1
-    displayName1.style.color = 'gold'
-    displayName2.style.color = ''
-  }
-  // ^^ move the style changes later
-  // console.log('winner is ', winner)
-}
-
-function checkJump(){
+function highlightJump(){
   boardArray.forEach((array, i) => {
     array.forEach((elem, idx) => {
       if (elem === turn || elem === turn*2){
