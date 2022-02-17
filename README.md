@@ -52,6 +52,8 @@ Will add more screeenshots of game here
 
 - Add more themes
 
+- Add more animation when switching screens
+
 
 ***
 

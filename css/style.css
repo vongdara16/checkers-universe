@@ -41,6 +41,12 @@ body.earth {
   text-align: center;
 }
 
+#start-screen {
+  display: flex;
+  flex-direction: column;
+
+}
+
 div#play-screen {
   display: flex;
   flex-direction: column;
@@ -135,6 +141,6 @@ div.jumpable-1 {
   /* background-color: gray; */
 }
 
-btns {
+#btns {
   display: flex;
 }
