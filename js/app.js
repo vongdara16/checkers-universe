@@ -73,7 +73,7 @@ function screenSwap(){
   setTimeout(() => {
     startScreen.toggleAttribute('hidden')
     playScreen.toggleAttribute('hidden')
-  }, 800)
+  }, 500)
 
   playScreen.classList.toggle('animate__fadeOutDown')
   playScreen.classList.toggle('animate__fadeInUp')

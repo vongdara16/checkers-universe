@@ -46,21 +46,21 @@ body {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  animation: fadeIn 2s;
+  animation: fadeIn 3s;
 }
 .background.earth {
-  background-image: url("../assets/bgspace.jpeg");
+  background-image: url("../assets/bgearth.jpeg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  animation: fadeIn 2s;
+  animation: fadeIn 3s;
 }
 .background.ocean {
-  background-image: url("../assets/bgspace.jpeg");
+  background-image: url("../assets/bgocean.jpeg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  animation: fadeIn 2s;
+  animation: fadeIn 3s;
 }
 
 
@@ -69,7 +69,7 @@ body {
   font-family: 'Exo 2', sans-serif;
   font-size: 6.4rem;
   animation: fadeInDown, color-change infinite;
-  animation-duration: 2s, 40s;
+  animation-duration: 1.5s, 40s;
   /* animation-delay: 2s; */
   text-align: center;
   /* height: 50vmin; */
@@ -83,7 +83,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  animation-duration: 2s;
+  animation-duration: 1.5s;
   margin: 7vmin 0 0 0;
   /* height: 50vmin; */
 }
@@ -173,7 +173,7 @@ input {
 }
 
 div#play-screen {
-  animation-duration: 2s;
+  animation-duration: 1.5s;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -343,9 +343,9 @@ div.one-piece.ocean {
   center / 100%;
 }
 div.one-king.ocean {
-  background-image: url("../assets/crown.png"), url("../assets/sbob.png") ;
-  background-position: center, center;
-  background-size: 90%, 110%;
+  background-image: url("../assets/crown.png"), url("../assets/sbobnew.png") ;
+  background-position: top, bottom;
+  background-size: 50%,100%;
   background-repeat: no-repeat, no-repeat;
 }
 div.two-piece.ocean {
@@ -354,33 +354,24 @@ div.two-piece.ocean {
   center / 130%;
 }
 div.two-king.ocean {
-  background-image: url("../assets/crown.png"), url("../assets/pstar.png") ;
-  background-position: center, center;
-  background-size: 90%, 110%;
+  background-image: url("../assets/whitecrown.png"), url("../assets/pstarnew.png") ;
+  background-position: right, top;
+  background-size: 40%, 100%;
   background-repeat: no-repeat, no-repeat;
 }
 
-
-
-/* box-shadow: 0 0 15px 2px rgba(255, 255, 255, 1); */
-
 div.highlight1 {
-  /* border: 4px solid red; */
   box-shadow: inset 0 0 5px 2px red;
 }
 
 div.highlight-1 {
   box-shadow: inset 0 0 5px 2px blue;
-  /* border: 4px solid blue; */
 }
 
 div.jumpable1 {
   box-shadow: inset 0 0 5px 5px #F45B69;
-  /* border: 4px solid lightcoral; */
 }
 
 div.jumpable-1 {
   box-shadow: inset 0 0 5px 5px #3AAED8;
-  /* border: 4px solid lightseagreen; */
-  /* background-color: gray; */
 }
