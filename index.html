@@ -20,6 +20,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Exo+2:wght@700&family=Lato&family=Oswald:wght@700&family=Poppins:wght@300&display=swap"
     rel="stylesheet">
+  <link rel="stylesheet" href="./js/confetti.js">
   <link rel="stylesheet" href="./css/style.css">
   <title>Document</title>
 </head>
@@ -36,8 +37,8 @@
         <input id="input-player2" type="text" placeholder="Enter Name">
       </div>
       <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown"
-          aria-expanded="false">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2"
+          data-bs-toggle="dropdown" aria-expanded="false">
           THEMES
         </button>
         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
@@ -52,18 +53,18 @@
       </div>
       <button id="play-btn" type="button" class="btn btn-success">PLAY</button>
     </div>
-  
+
     <!--------------------------------------------------------------------------------------->
-  
+
     <div id="play-screen" class="animate__animated">
       <div id="btns">
         <button id="start-menu-btn" type="button" class="btn btn-success">START MENU</button>
         <button id="reset-btn" type="button" class="btn btn-success">RESET</button>
       </div>
       <h4 id="display-name-2">player 2 display name</h4>
-  
+
       <section id="game-board">
-  
+
         <div class="square" id="white"></div>
         <div class="square inplay" id="07"></div>
         <div class="square" id="white"></div>
@@ -131,6 +132,7 @@
       </section>
       <h4 id="display-name-1">player 1 display name</h4>
     </div>
+    <div id="win-msg" hidden>test</div>
   </div>
 </body>
 

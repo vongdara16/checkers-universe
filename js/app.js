@@ -18,6 +18,7 @@ let name1, name2
 /*------------------------ Cached Element References ------------------------*/
 const gameTitle = document.querySelector('#game-title')
 const background = document.querySelector('.background')
+const winMsg = document.querySelector('#win-msg')
 
 const playerName1 = document.querySelector('#input-player1')
 const playerName2 = document.querySelector('#input-player2')
@@ -28,7 +29,6 @@ const startScreen = document.querySelector('#start-screen')
 
 const startMenuBtn = document.querySelector('#start-menu-btn')
 const resetBtn = document.querySelector('#reset-btn')
-const gameBoard = document.querySelector('#game-board') // may not be needed
 const sqInplay = document.querySelectorAll('.inplay')
 const playScreen = document.querySelector('#play-screen')
 const displayName1 = document.querySelector('#display-name-1')
@@ -53,28 +53,21 @@ sqInplay.forEach((elem) => {
 })
 
 /*-------------------------------- Functions --------------------------------*/
-// init()
 firstScreenLoadUp()
 function firstScreenLoadUp(){
   startScreen.classList.add('animate__fadeInDown')
   playScreen.setAttribute('hidden', true)
-  
-  playScreen.classList.add('animate__fadeOutDown') //MAYBE DEL
-  
+  playScreen.classList.add('animate__fadeOutDown')
 }
 
 function screenSwap(){
   startScreen.classList.toggle('animate__fadeInDown')
   startScreen.classList.toggle('animate__fadeOutUp')
-
-  
   background.classList.toggle(`${chosenTheme}`)
-  
   setTimeout(() => {
     startScreen.toggleAttribute('hidden')
     playScreen.toggleAttribute('hidden')
   }, 500)
-
   playScreen.classList.toggle('animate__fadeOutDown')
   playScreen.classList.toggle('animate__fadeInUp')
 }
@@ -90,13 +83,13 @@ function init(){
   turn = 1
   winner = null
   boardArray = [
-    [-2, null, 1, null, null, -1, null, 2],  // array 0
-    [-2, null, 1, null, null, -1, null, 2],  // array 1
-    [-2, null, 1, null, null, -1, null, 2],  // array 2
-    [-2, null, 1, null, null, -1, null, 2]   // array 3
+    [1, 1, 1, null, null, -1, -1, -1],  // array 0
+    [1, 1, 1, null, null, -1, -1, -1],  // array 1
+    [1, 1, 1, null, null, -1, -1, -1],  // array 2
+    [1, 1, 1, null, null, -1, -1, -1]   // array 3
   ]
-  p1Pieces = 12
-  p2Pieces = -12
+  p1Pieces = 1
+  p2Pieces = -1
   render();
   resetPieceInfo();
   resetHighlight();
@@ -169,12 +162,20 @@ function render(){
 function getWinner(){
   if (p1Pieces === 0){
     winner = -1
+    winMsg.toggleAttribute('hidden')
+    winMsg.innerHTML = `${name2} WON!`
     displayName2.style.color = 'gold'
     displayName1.style.color = ''
+    confetti.start(3000)
+    return
   } else if (p2Pieces === 0){
     winner = 1
+    winMsg.toggleAttribute('hidden')
+    winMsg.innerHTML = `${name2} WON!`
     displayName1.style.color = 'gold'
     displayName2.style.color = ''
+    confetti.start(3000)
+    return
   }
   // ^^ move the style changes later
   // console.log('winner is ', winner)
