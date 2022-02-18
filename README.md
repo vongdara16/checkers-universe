@@ -1,15 +1,11 @@
 # CHECKERS UNIVERSE
-<!-- ### By: Justin Vongdara -->
 
-<!-- [GitHub](https://github.com/vongdara16) -->
 *** 
 
 ### Overview 
 
 Checkers Universe is an adaptive take on the classic game of Checkers! Before starting the game, the user can enter their desired Player Names. After, the user can select a theme of their liking from a drop down list. Then press Play to begin! The game will start with Player 1 going first and turns will alternate after every move. First player to remove all of the opposing pieces off the board wins!
 
-
-Possibly add history of checkers
 
 ***
 
@@ -40,7 +36,21 @@ Possibly add history of checkers
 Wireframe
 ![Home](https://i.imgur.com/CzgTlmz.png)
 
-Will add more screeenshots of game here
+Start Screen
+![StartScreen](https://i.imgur.com/0ygo60n.png)
+
+Game Screen
+![GameScreen](https://i.imgur.com/3FMTXSE.png)
+
+Space Screen
+![SpaceScreen](https://i.imgur.com/tT7Eyxq.png)
+
+Earth Screen
+![EarthScreen](https://i.imgur.com/u0bJUzV.png)
+
+Ocean Screen
+![OceanScreen](https://i.imgur.com/AkTlG0N.png)
+
 ***
 
 ### Stretch Goals ✅
@@ -57,7 +67,7 @@ Will add more screeenshots of game here
 
 - Add more themes
 
-- Add more animation when switching screens
+- Add more animation
 
 - Mobile Responsive
 
