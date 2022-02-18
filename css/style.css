@@ -27,7 +27,8 @@ body {
   font-family: 'Exo 2', sans-serif;
   font-family: 'Oswald', sans-serif;
   font-family: 'Lato', sans-serif;
-  font-family: 'Poppins', sans-serif; */
+  font-family: 'Poppins', sans-serif;
+   */
 
   /* Use a system font, if none are available use an available sans-sarif font */
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -135,31 +136,31 @@ input {
     color: darkblue;
   }
   10% {
-    color: #8e44ad;
+    color: #DC0073;
   }
   20% {
-    color: #1abc9c;
+    color: #F26419;
   }
   30% {
-    color: #d35400;
+    color: #04E762;
   }
   40% {
-    color: pink;
+    color: #BDB246;
   }
   50% {
-    color: #34495e;
+    color: #00A1E4;
   }
   60% {
-    color: blue;
+    color: #BD1E1E;
   }
   70% {
-    color: #2980b9;
+    color: #E5F77D;
   }
   80% {
-    color: #f1c40f;
+    color: #F39C6B;
   }
   90% {
-    color: #2980b9;
+    color: #0A8DEB;
   }
   100% {
     color: darkblue;
@@ -205,7 +206,7 @@ h4 {
   background-color: rgba(255, 255, 255, 0.6);
   width: 215px;
   height: 30px;
-  margin: 10px;
+  margin: 15px;
   border: 3px solid white;
   border-radius: 30px;
   font-family: 'Lato', sans-serif;
@@ -367,7 +368,17 @@ div.jumpable-1 {
 
 #win-msg {
   position: absolute;
-  top: 50%;
+  top: 58%;
   left: 50%;
   transform: translate(-50%, -50%);
+  height: 10vmin;
+  width: 50vmin;
+  background-color: rgba(255, 255, 255, 0.9);
+  font-size: 48px;
+  font-family: 'Exo 2', sans-serif;
+  text-align: center;
+  border: 5px solid black;
+  border-radius: 15px;
+  color: #E0A800;
+  animation: fadeIn 1s;
 }

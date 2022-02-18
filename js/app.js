@@ -88,12 +88,13 @@ function init(){
     [1, 1, 1, null, null, -1, -1, -1],  // array 2
     [1, 1, 1, null, null, -1, -1, -1]   // array 3
   ]
-  p1Pieces = 1
-  p2Pieces = -1
+  p1Pieces = 12
+  p2Pieces = -12
   render();
   resetPieceInfo();
   resetHighlight();
   resetJumpable();
+  winMsg.setAttribute('hidden', true)
 }
 
 function resetPieceInfo(){
@@ -164,41 +165,42 @@ function getWinner(){
     winner = -1
     winMsg.toggleAttribute('hidden')
     winMsg.innerHTML = `${name2} WON!`
-    displayName2.style.color = 'gold'
+    displayName2.style.color = '#E0A800'
     displayName1.style.color = ''
-    confetti.start(3000)
+    confetti.start(2000)
     return
   } else if (p2Pieces === 0){
     winner = 1
     winMsg.toggleAttribute('hidden')
-    winMsg.innerHTML = `${name2} WON!`
-    displayName1.style.color = 'gold'
+    winMsg.innerHTML = `${name1} WON!`
+    displayName1.style.color = '#E0A800'
     displayName2.style.color = ''
-    confetti.start(3000)
+    confetti.start(2000);
     return
   }
-  // ^^ move the style changes later
-  // console.log('winner is ', winner)
+  // winMsg.toggleAttribute('hidden')
 }
 
 function playerMove(evt){
-  if (turn === 1){
-    if (evt.target.classList.contains('one-piece') || evt.target.classList.contains('one-king') ){
-      getPiece(evt);
-      resetHighlight();
-      evt.target.parentElement.classList.add('highlight1')
+  if (winner === null){
+    if (turn === 1){
+      if (evt.target.classList.contains('one-piece') || evt.target.classList.contains('one-king') ){
+        getPiece(evt);
+        resetHighlight();
+        evt.target.parentElement.classList.add('highlight1')
+      }
+    } else {
+      if (evt.target.classList.contains('two-piece') || evt.target.classList.contains('two-king')){
+        getPiece(evt);
+        resetHighlight();
+        evt.target.parentElement.classList.add('highlight-1')
+      }
     }
-  } else {
-    if (evt.target.classList.contains('two-piece') || evt.target.classList.contains('two-king')){
-      getPiece(evt);
+    if (evt.target.classList.contains('inplay') && pieceId !== null){
+      getTarget(evt);
       resetHighlight();
-      evt.target.parentElement.classList.add('highlight-1')
+      movePiece();
     }
-  }
-  if (evt.target.classList.contains('inplay') && pieceId !== null){
-    getTarget(evt);
-    resetHighlight();
-    movePiece();
   }
 }
 
