@@ -35,7 +35,35 @@ body {
     Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   margin: 0;
   min-height: 100vh;
+  overflow: hidden;
 }
+.background {
+  min-height: 100vh;
+}
+
+.background.space {
+  background-image: url("../assets/bgspace.jpeg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  animation: fadeIn 2s;
+}
+.background.earth {
+  background-image: url("../assets/bgspace.jpeg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  animation: fadeIn 2s;
+}
+.background.ocean {
+  background-image: url("../assets/bgspace.jpeg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  animation: fadeIn 2s;
+}
+
+
 
 #game-title {
   font-family: 'Exo 2', sans-serif;
@@ -181,7 +209,7 @@ h4 {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.6);
   width: 215px;
   height: 30px;
   margin: 10px;
@@ -196,13 +224,14 @@ section#game-board {
   grid-template-rows: repeat(8, 7vmin);
   grid-template-columns: repeat(8, 7vmin);
   grid-gap: 0vmin;
-  border: 15px solid white;
+  border: 15px solid rgba(255, 255, 255, 0.9);
   border-radius: 10px;
+  box-shadow: 0 0 15px 5px rgba(0, 0, 0, 1);
 }
 
 div.square {
   border: 1px solid black;
-  background-color: rgba(100, 100, 100, 0.6);
+  background-color: rgba(100, 100, 100, 0.5);
   display: grid;
 }
 
@@ -218,7 +247,7 @@ div.one-piece {
   width: 90%;
   justify-self: center;
   align-self: center;
-  text-align: center;
+  /* text-align: center; */
 }
 
 div.two-piece {
@@ -229,7 +258,7 @@ div.two-piece {
   width: 90%;
   justify-self: center;
   align-self: center;
-  text-align: center;
+  /* text-align: center; */
 }
 
 div.one-king {
@@ -244,7 +273,7 @@ div.one-king {
   width: 90%;
   justify-self: center;
   align-self: center;
-  text-align: center;
+  /* text-align: center; */
 }
 
 div.two-king {
@@ -259,7 +288,7 @@ div.two-king {
   width: 90%;
   justify-self: center;
   align-self: center;
-  text-align: center;
+  /* text-align: center; */
 }
 
 div.one-piece.space {
@@ -351,7 +380,7 @@ div.jumpable1 {
 }
 
 div.jumpable-1 {
-  box-shadow: inset 0 0 5px 5px #4062BB;
+  box-shadow: inset 0 0 5px 5px #3AAED8;
   /* border: 4px solid lightseagreen; */
   /* background-color: gray; */
 }

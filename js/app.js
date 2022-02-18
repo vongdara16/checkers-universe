@@ -17,7 +17,7 @@ let name1, name2
 
 /*------------------------ Cached Element References ------------------------*/
 const gameTitle = document.querySelector('#game-title')
-const body = document.querySelector('body')
+const background = document.querySelector('.background')
 
 const playerName1 = document.querySelector('#input-player1')
 const playerName2 = document.querySelector('#input-player2')
@@ -58,44 +58,25 @@ firstScreenLoadUp()
 function firstScreenLoadUp(){
   startScreen.classList.add('animate__fadeInDown')
   playScreen.setAttribute('hidden', true)
-  // gameTitle.classList.add('animate__fadeInDown') DELETE
   
   playScreen.classList.add('animate__fadeOutDown') //MAYBE DEL
   
-  // body.classList.add('animate__fadeInDown')
 }
 
 function screenSwap(){
   startScreen.classList.toggle('animate__fadeInDown')
   startScreen.classList.toggle('animate__fadeOutUp')
 
-  startScreen.toggleAttribute('hidden')
+  
+  background.classList.toggle(`${chosenTheme}`)
   
   setTimeout(() => {
+    startScreen.toggleAttribute('hidden')
     playScreen.toggleAttribute('hidden')
-  }, 1000)
-
+  }, 800)
 
   playScreen.classList.toggle('animate__fadeOutDown')
   playScreen.classList.toggle('animate__fadeInUp')
-
-  // gameTitle.style.padding
-  // setTimeout(function(){
-  //   playScreen.toggleAttribute('hidden')
-  //   startScreen.toggleAttribute('hidden')
-  // }, 300)
-  
-
-
-
-  // set timers for changing screens 
-  // body.classList.toggle('animate__fadeInDown') 
-  // body.classList.toggle('animate__fadeOutUp')
-  // set timers for allowing the body to change first. then the board will appear after. 
-
-  // setTimeout(function(){
-  //   playScreen.classList.toggle(`${chosenTheme}`)
-  // }, 1000)
 }
 
 function selectTheme(evt){
@@ -109,10 +90,10 @@ function init(){
   turn = 1
   winner = null
   boardArray = [
-    [1, 1, 1, null, null, -1, -1, -1],  // array 0
-    [1, 1, 1, null, null, -1, -1, -1],  // array 1
-    [1, 1, 1, null, null, -1, -1, -1],  // array 2
-    [1, 1, 1, null, null, -1, -1, -1]   // array 3
+    [-2, null, 1, null, null, -1, null, 2],  // array 0
+    [-2, null, 1, null, null, -1, null, 2],  // array 1
+    [-2, null, 1, null, null, -1, null, 2],  // array 2
+    [-2, null, 1, null, null, -1, null, 2]   // array 3
   ]
   p1Pieces = 12
   p2Pieces = -12
@@ -225,6 +206,7 @@ function getPiece(evt){
   pieceId = evt.target.id
   pieceFirstN = Number(pieceId[0])
   pieceLastN = Number(pieceId[1])
+  console.log(pieceClass)
 }
 
 function getTarget(evt){
@@ -248,7 +230,7 @@ function resetJumpable(){
 }
 
 function movePiece(){
-  if (pieceClass === 'one-king' || pieceClass === 'two-king'){
+  if (pieceClass.includes('one-king') || pieceClass.includes('two-king')){
     if (pieceLastN % 2 === 0){
       if (moveKingCond(-1)){
         updateBoard();

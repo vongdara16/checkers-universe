@@ -24,111 +24,113 @@
   <title>Document</title>
 </head>
 
-<body class="animate__animated">
-  <h1 id="game-title">CHECKERS UNIVERSE</h1>
-  <div id="start-screen" class="animate__animated">
-    <h2 id="welcome-msg">PLEASE ENTER THE PLAYERS NAMES BELOW AND SELECT A THEME! <br>PRESS PLAY TO BEGIN! </h2>
-    <div id="inputs">
-      <h3 class="player-names">Player 1</h3>
-      <h3 class="player-names">Player 2</h3>
-      <input id="input-player1" type="text" placeholder="Enter Name">
-      <input id="input-player2" type="text" placeholder="Enter Name">
+<body>
+  <div class="background">
+    <h1 id="game-title">CHECKERS UNIVERSE</h1>
+    <div id="start-screen" class="animate__animated">
+      <h2 id="welcome-msg">PLEASE ENTER THE PLAYERS NAMES BELOW AND SELECT A THEME! <br>PRESS PLAY TO BEGIN! </h2>
+      <div id="inputs">
+        <h3 class="player-names">Player 1</h3>
+        <h3 class="player-names">Player 2</h3>
+        <input id="input-player1" type="text" placeholder="Enter Name">
+        <input id="input-player2" type="text" placeholder="Enter Name">
+      </div>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          THEMES
+        </button>
+        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+          <li><a class="dropdown-item" href="#">SPACE</a></li>
+          <li><a class="dropdown-item" href="#">EARTH</a></li>
+          <li><a class="dropdown-item" href="#">OCEAN</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" href="#">NONE</a></li>
+        </ul>
+      </div>
+      <button id="play-btn" type="button" class="btn btn-success">PLAY</button>
     </div>
-    <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown"
-        aria-expanded="false">
-        THEMES
-      </button>
-      <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-        <li><a class="dropdown-item" href="#">SPACE</a></li>
-        <li><a class="dropdown-item" href="#">EARTH</a></li>
-        <li><a class="dropdown-item" href="#">OCEAN</a></li>
-        <li>
-          <hr class="dropdown-divider">
-        </li>
-        <li><a class="dropdown-item" href="#">NONE</a></li>
-      </ul>
+  
+    <!--------------------------------------------------------------------------------------->
+  
+    <div id="play-screen" class="animate__animated">
+      <div id="btns">
+        <button id="start-menu-btn" type="button" class="btn btn-success">START MENU</button>
+        <button id="reset-btn" type="button" class="btn btn-success">RESET</button>
+      </div>
+      <h4 id="display-name-2">player 2 display name</h4>
+  
+      <section id="game-board">
+  
+        <div class="square" id="white"></div>
+        <div class="square inplay" id="07"></div>
+        <div class="square" id="white"></div>
+        <div class="square inplay" id="17"></div>
+        <div class="square" id="white"></div>
+        <div class="square inplay" id="27"></div>
+        <div class="square" id="white"></div>
+        <div class="square inplay" id="37"></div>
+        <div class="square inplay" id="06"></div>
+        <div class="square" id="white"></div>
+        <div class="square inplay" id="16"></div>
+        <div class="square" id="white"></div>
+        <div class="square inplay" id="26"></div>
+        <div class="square" id="white"></div>
+        <div class="square inplay" id="36"></div>
+        <div class="square" id="white"></div>
+        <div class="square" id="white"></div>
+        <div class="square inplay" id="05"></div>
+        <div class="square" id="white"></div>
+        <div class="square inplay" id="15"></div>
+        <div class="square" id="white"></div>
+        <div class="square inplay" id="25"></div>
+        <div class="square" id="white"></div>
+        <div class="square inplay" id="35"></div>
+        <div class="square inplay" id="04"></div>
+        <div class="square" id="white"></div>
+        <div class="square inplay" id="14"></div>
+        <div class="square" id="white"></div>
+        <div class="square inplay" id="24"></div>
+        <div class="square" id="white"></div>
+        <div class="square inplay" id="34"></div>
+        <div class="square" id="white"></div>
+        <div class="square" id="white"></div>
+        <div class="square inplay" id="03"></div>
+        <div class="square" id="white"></div>
+        <div class="square inplay" id="13"></div>
+        <div class="square" id="white"></div>
+        <div class="square inplay" id="23"></div>
+        <div class="square" id="white"></div>
+        <div class="square inplay" id="33"></div>
+        <div class="square inplay" id="02"></div>
+        <div class="square" id="white"></div>
+        <div class="square inplay" id="12"></div>
+        <div class="square" id="white"></div>
+        <div class="square inplay" id="22"></div>
+        <div class="square" id="white"></div>
+        <div class="square inplay" id="32"></div>
+        <div class="square" id="white"></div>
+        <div class="square" id="white"></div>
+        <div class="square inplay" id="01"></div>
+        <div class="square" id="white"></div>
+        <div class="square inplay" id="11"></div>
+        <div class="square" id="white"></div>
+        <div class="square inplay" id="21"></div>
+        <div class="square" id="white"></div>
+        <div class="square inplay" id="31"></div>
+        <div class="square inplay" id="00"></div>
+        <div class="square" id="white"></div>
+        <div class="square inplay" id="10"></div>
+        <div class="square" id="white"></div>
+        <div class="square inplay" id="20"></div>
+        <div class="square" id="white"></div>
+        <div class="square inplay" id="30"></div>
+        <div class="square" id="white"></div>
+      </section>
+      <h4 id="display-name-1">player 1 display name</h4>
     </div>
-    <button id="play-btn" type="button" class="btn btn-success">PLAY</button>
-  </div>
-
-  <!--------------------------------------------------------------------------------------->
-
-  <div id="play-screen" class="animate__animated">
-    <div id="btns">
-      <button id="start-menu-btn" type="button" class="btn btn-success">START MENU</button>
-      <button id="reset-btn" type="button" class="btn btn-success">RESET</button>
-    </div>
-    <h4 id="display-name-2">player 2 display name</h4>
-
-    <section id="game-board">
-
-      <div class="square" id="white"></div>
-      <div class="square inplay" id="07"></div>
-      <div class="square" id="white"></div>
-      <div class="square inplay" id="17"></div>
-      <div class="square" id="white"></div>
-      <div class="square inplay" id="27"></div>
-      <div class="square" id="white"></div>
-      <div class="square inplay" id="37"></div>
-      <div class="square inplay" id="06"></div>
-      <div class="square" id="white"></div>
-      <div class="square inplay" id="16"></div>
-      <div class="square" id="white"></div>
-      <div class="square inplay" id="26"></div>
-      <div class="square" id="white"></div>
-      <div class="square inplay" id="36"></div>
-      <div class="square" id="white"></div>
-      <div class="square" id="white"></div>
-      <div class="square inplay" id="05"></div>
-      <div class="square" id="white"></div>
-      <div class="square inplay" id="15"></div>
-      <div class="square" id="white"></div>
-      <div class="square inplay" id="25"></div>
-      <div class="square" id="white"></div>
-      <div class="square inplay" id="35"></div>
-      <div class="square inplay" id="04"></div>
-      <div class="square" id="white"></div>
-      <div class="square inplay" id="14"></div>
-      <div class="square" id="white"></div>
-      <div class="square inplay" id="24"></div>
-      <div class="square" id="white"></div>
-      <div class="square inplay" id="34"></div>
-      <div class="square" id="white"></div>
-      <div class="square" id="white"></div>
-      <div class="square inplay" id="03"></div>
-      <div class="square" id="white"></div>
-      <div class="square inplay" id="13"></div>
-      <div class="square" id="white"></div>
-      <div class="square inplay" id="23"></div>
-      <div class="square" id="white"></div>
-      <div class="square inplay" id="33"></div>
-      <div class="square inplay" id="02"></div>
-      <div class="square" id="white"></div>
-      <div class="square inplay" id="12"></div>
-      <div class="square" id="white"></div>
-      <div class="square inplay" id="22"></div>
-      <div class="square" id="white"></div>
-      <div class="square inplay" id="32"></div>
-      <div class="square" id="white"></div>
-      <div class="square" id="white"></div>
-      <div class="square inplay" id="01"></div>
-      <div class="square" id="white"></div>
-      <div class="square inplay" id="11"></div>
-      <div class="square" id="white"></div>
-      <div class="square inplay" id="21"></div>
-      <div class="square" id="white"></div>
-      <div class="square inplay" id="31"></div>
-      <div class="square inplay" id="00"></div>
-      <div class="square" id="white"></div>
-      <div class="square inplay" id="10"></div>
-      <div class="square" id="white"></div>
-      <div class="square inplay" id="20"></div>
-      <div class="square" id="white"></div>
-      <div class="square inplay" id="30"></div>
-      <div class="square" id="white"></div>
-    </section>
-    <h4 id="display-name-1">player 1 display name</h4>
   </div>
 </body>
 
