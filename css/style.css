@@ -69,9 +69,7 @@ body {
   font-size: 6.4rem;
   animation: fadeInDown, color-change infinite;
   animation-duration: 1.5s, 40s;
-  /* animation-delay: 2s; */
   text-align: center;
-  /* height: 50vmin; */
   padding: 6vmin 0 0 0;
   margin: 0 auto;
 }
@@ -84,7 +82,6 @@ body {
   align-items: center;
   animation-duration: 1.5s;
   margin: 7vmin 0 0 0;
-  /* height: 50vmin; */
 }
 
 #welcome-msg {

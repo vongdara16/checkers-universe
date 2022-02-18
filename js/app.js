@@ -73,10 +73,8 @@ function screenSwap(){
 }
 
 function selectTheme(evt){
-  console.log(evt.target.innerHTML)
   dropDownBtn.innerHTML = evt.target.innerHTML
   chosenTheme = evt.target.innerHTML.toLowerCase()
-  console.log(chosenTheme)
 }
 
 function init(){
@@ -178,7 +176,6 @@ function getWinner(){
     confetti.start(2000);
     return
   }
-  // winMsg.toggleAttribute('hidden')
 }
 
 function playerMove(evt){
@@ -245,9 +242,7 @@ function movePiece(){
     }else {
       if (moveKingCond(1)){
         updateBoard();
-        // console.log('test move 1 space odd king')
       } else if (jumpKingCond()){
-        // console.log('if jump king odd passes')
         jumpKingOdd();
       } else {
         resetPieceInfo();
@@ -261,7 +256,6 @@ function movePiece(){
         jumpPieceEven();
       } else {
         resetPieceInfo();
-        // turn *= -1;
       }
     }else {
       if (moveCond(1)){
@@ -270,7 +264,6 @@ function movePiece(){
         jumpPieceOdd();
       } else {
         resetPieceInfo();
-        // turn *= -1;
       }
     }
   }
@@ -300,11 +293,9 @@ function kingMe(){
     array.forEach((elem, idx) => {
       if (elem === 1 && idx === 7){
         boardArray[i][idx] = 2
-        console.log('king me')
       }
       if (elem === -1 && idx === 0){
         boardArray[i][idx] = -2
-        console.log('im king')
       }
     })
   })
@@ -346,7 +337,6 @@ function jumpPieceEven(){
     boardArray[targetFirstN][targetLastN-turn] = null;
     pieceCount();
     updateBoard();
-    console.log('even piece jumping up left')
     return
     // even last num jumping left
   }
@@ -354,7 +344,6 @@ function jumpPieceEven(){
     boardArray[pieceFirstN][pieceLastN+turn] = null;
     pieceCount();
     updateBoard();
-    console.log('even piece jump up right')
     return
     // even last num jumping right
   }
@@ -365,7 +354,6 @@ function jumpPieceOdd(){
     boardArray[pieceFirstN][pieceLastN+turn] = null;
     pieceCount();
     updateBoard();
-    console.log('odd piece jump up left')
     return
     // odd last num jumping left
   }
@@ -374,7 +362,6 @@ function jumpPieceOdd(){
     boardArray[targetFirstN][targetLastN-turn] = null;
     pieceCount();
     updateBoard();
-    console.log('odd piece jump up right')
     return
     // odd last num jumping right
   }
@@ -386,7 +373,6 @@ function jumpKingEven(){
       boardArray[pieceFirstN][pieceLastN+1] = null
       pieceCount();
       updateBoard();
-      console.log('jump king even up right')
       return  // king even jump up right
     } 
     
@@ -394,7 +380,6 @@ function jumpKingEven(){
       boardArray[targetFirstN][targetLastN-1] = null
       pieceCount();
       updateBoard();
-      console.log('jump king even up left')
       return  // king even jump up left
     }
   } else{
@@ -403,7 +388,6 @@ function jumpKingEven(){
       console.log(pieceId, 'pieceID', targetId, 'targetID')
       pieceCount();
       updateBoard();
-      console.log('jump king even down right')
       return  // king even jump down right
     } 
     
@@ -411,7 +395,6 @@ function jumpKingEven(){
       boardArray[targetFirstN][targetLastN+1] = null
       pieceCount();
       updateBoard();
-      console.log('jump king even down left')
       return  // king even jump down left
     }
   }
@@ -423,7 +406,6 @@ function jumpKingOdd(){
       boardArray[targetFirstN][targetLastN-1] = null
       pieceCount();
       updateBoard();
-      console.log('jump king odd up right')
       return  // king odd jump up right
     }
 
@@ -431,7 +413,6 @@ function jumpKingOdd(){
       boardArray[pieceFirstN][pieceLastN+1] = null
       pieceCount();
       updateBoard();
-      console.log('jump king odd up left')
       return  // king odd jump up left
     }
   } else {
@@ -439,7 +420,6 @@ function jumpKingOdd(){
       boardArray[targetFirstN][targetLastN+1] = null
       pieceCount();
       updateBoard();
-      console.log('jump king odd down right')
       return  // king odd jump down right
     }
 
@@ -447,7 +427,6 @@ function jumpKingOdd(){
       boardArray[pieceFirstN][pieceLastN-1] = null
       pieceCount();
       updateBoard();
-      console.log('jump king odd down left')
       return  // king odd jump down left
     }
   }
@@ -461,8 +440,6 @@ function pieceCount(){
   if (turn === -1){
     p1Pieces--
   }
-  console.log(p1Pieces, 'p1 pieces', p2Pieces, 'p2 pieces')
-  // possibly simplify by both values equal positive 12. maybe
 }
 
 function highlightJump(){
