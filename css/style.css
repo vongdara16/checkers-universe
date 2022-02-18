@@ -202,7 +202,6 @@ section#game-board {
 
 div.square {
   border: 1px solid black;
-  /* font-size: 2vmin; */
   background-color: rgba(100, 100, 100, 0.6);
   display: grid;
 }
@@ -220,13 +219,6 @@ div.one-piece {
   justify-self: center;
   align-self: center;
   text-align: center;
-  /* box-shadow: 0 0 15px 2px rgba(255, 255, 255, 1); */
-}
-
-div.one-piece.space {
-  background: 
-    url("../assets/sun.png")
-    center / 110%;
 }
 
 div.two-piece {
@@ -238,12 +230,6 @@ div.two-piece {
   justify-self: center;
   align-self: center;
   text-align: center;
-}
-
-div.two-piece.space {
-  background: 
-  url("../assets/moon.png")
-  center / 100%;
 }
 
 div.one-king {
@@ -261,13 +247,6 @@ div.one-king {
   text-align: center;
 }
 
-div.one-king.space {
-  background-image: url("../assets/crown.png"), url("../assets/sun.png") ;
-  background-position: center, center;
-  background-size: 90%, 110%;
-  background-repeat: no-repeat, no-repeat;
-}
-
 div.two-king {
   border-radius: 50%;
   border: 3px solid black;
@@ -283,6 +262,22 @@ div.two-king {
   text-align: center;
 }
 
+div.one-piece.space {
+  background: 
+  url("../assets/sun.png")
+  center / 110%;
+}
+div.one-king.space {
+  background-image: url("../assets/crown.png"), url("../assets/sun.png") ;
+  background-position: center, center;
+  background-size: 90%, 110%;
+  background-repeat: no-repeat, no-repeat;
+}
+div.two-piece.space {
+  background: 
+  url("../assets/moon.png")
+  center / 100%;
+}
 div.two-king.space {
   background-image: url("../assets/crown.png"), url("../assets/moon.png") ;
   background-position: center, center;
@@ -290,22 +285,73 @@ div.two-king.space {
   background-repeat: no-repeat, no-repeat;
 }
 
+div.one-piece.earth {
+  background: 
+  url("../assets/earth.png")
+  center / 100%;
+}
+div.one-king.earth {
+  background-image: url("../assets/crown.png"), url("../assets/earth.png") ;
+  background-position: center, center;
+  background-size: 90%, 110%;
+  background-repeat: no-repeat, no-repeat;
+}
+div.two-piece.earth {
+  background: 
+  url("../assets/redearth.png")
+  center / 100%;
+}
+div.two-king.earth {
+  background-image: url("../assets/whitecrown.png"), url("../assets/redearth.png") ;
+  background-position: center, center;
+  background-size: 90%, 110%;
+  background-repeat: no-repeat, no-repeat;
+}
+
+div.one-piece.ocean {
+  background: 
+  url("../assets/sbob.png")
+  center / 100%;
+}
+div.one-king.ocean {
+  background-image: url("../assets/crown.png"), url("../assets/sbob.png") ;
+  background-position: center, center;
+  background-size: 90%, 110%;
+  background-repeat: no-repeat, no-repeat;
+}
+div.two-piece.ocean {
+  background: 
+  url("../assets/pstar.png")
+  center / 130%;
+}
+div.two-king.ocean {
+  background-image: url("../assets/crown.png"), url("../assets/pstar.png") ;
+  background-position: center, center;
+  background-size: 90%, 110%;
+  background-repeat: no-repeat, no-repeat;
+}
 
 
+
+/* box-shadow: 0 0 15px 2px rgba(255, 255, 255, 1); */
 
 div.highlight1 {
-  border: 4px solid red;
+  /* border: 4px solid red; */
+  box-shadow: inset 0 0 5px 2px red;
 }
 
 div.highlight-1 {
-  border: 4px solid blue;
+  box-shadow: inset 0 0 5px 2px blue;
+  /* border: 4px solid blue; */
 }
 
 div.jumpable1 {
-  border: 4px solid lightcoral;
+  box-shadow: inset 0 0 5px 5px #F45B69;
+  /* border: 4px solid lightcoral; */
 }
 
 div.jumpable-1 {
-  border: 4px solid lightseagreen;
+  box-shadow: inset 0 0 5px 5px #4062BB;
+  /* border: 4px solid lightseagreen; */
   /* background-color: gray; */
 }
