@@ -78,5 +78,3 @@ Ocean Screen
 
 Credits to [Animate.css](https://animate.style/) and [Bootstrap](https://getbootstrap.com/docs/5.1/getting-started/introduction/)  
 All background images were found on Google.
-
-
